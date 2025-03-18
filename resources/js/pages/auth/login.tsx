@@ -26,7 +26,7 @@ export default function Login(args: LoginProps) {
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
 
-    post(route("login"))
+    post("/login")
   }
 
   return (
@@ -74,7 +74,7 @@ export default function Login(args: LoginProps) {
           Log in
         </Button>
         <div className="text-center">
-          <Link href={route("register")} className="sm:text-sm" intent="secondary">
+          <Link href="/register" className="sm:text-sm" intent="secondary">
             Dont have account? Register
           </Link>
         </div>

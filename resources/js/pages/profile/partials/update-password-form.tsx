@@ -14,7 +14,7 @@ export function UpdatePasswordForm() {
 
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    put(route("password.update"), {
+    put("/password", {
       preserveScroll: true,
       onSuccess: () => {
         toast.success("Your profile information has been updated.")

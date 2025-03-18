@@ -17,7 +17,7 @@ export default function ConfirmPassword() {
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
 
-    post(route("password.confirm"))
+    post("/confirm-password")
   }
 
   return (

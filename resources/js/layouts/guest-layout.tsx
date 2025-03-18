@@ -17,7 +17,7 @@ export default function GuestLayout({
   return (
     <div className="flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">
       <Flash />
-      <Link href={route("home")}>
+      <Link href="/">
         <Logo className="size-6" />
       </Link>
 

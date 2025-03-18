@@ -17,7 +17,7 @@ export function UpdateProfileInformationForm({ mustVerifyEmail, status, classNam
 
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    patch(route("profile.update"), {
+    patch("/profile", {
       preserveScroll: true,
     })
   }
@@ -59,7 +59,7 @@ export function UpdateProfileInformationForm({ mustVerifyEmail, status, classNam
               <p className="mt-2 text-sm">
                 Your email address is unverified.
                 <Link
-                  href={route("verification.send")}
+                  href="/email/verification-notification"
                   intent="secondary"
                   routerOptions={{
                     method: "post",

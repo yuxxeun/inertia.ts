@@ -122,11 +122,11 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
                   intent: "outline",
                   size: "small",
                 })}
-                href={route("login")}
+                href="/login"
               >
                 Login
               </Link>
-              <Navbar.Item href={route("register")}>Register</Navbar.Item>
+              <Navbar.Item href="/register">Register</Navbar.Item>
             </>
           )}
         </Navbar.Section>
@@ -152,7 +152,7 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
                   size: "small",
                   shape: "circle",
                 })}
-                href={route("login")}
+                href="/login"
               >
                 Login
               </Link>
@@ -193,10 +193,10 @@ function UserMenu() {
             </div>
           </Menu.Header>
         </Menu.Section>
-        <Menu.Item href={route("dashboard")}>
+        <Menu.Item href="/dashboard">
           <Menu.Label>Dashboard</Menu.Label>
         </Menu.Item>
-        <Menu.Item href={route("profile.edit")} className="justify-between">
+        <Menu.Item href="/profile" className="justify-between">
           <Menu.Label>Settings</Menu.Label>
           <IconSettings />
         </Menu.Item>
@@ -236,7 +236,7 @@ function UserMenu() {
           <IconBrandJustdBlocks />
         </Menu.Item>
         <Menu.Separator />
-        <Menu.Item routerOptions={{ method: "post" }} href={route("logout")}>
+        <Menu.Item routerOptions={{ method: "post" }} href="/logout">
           <Menu.Label>Logout</Menu.Label>
           <IconLogout />
         </Menu.Item>

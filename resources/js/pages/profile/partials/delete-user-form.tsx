@@ -21,7 +21,7 @@ export function DeleteUserForm() {
   }
 
   const deleteUser = () => {
-    destroy(route("profile.destroy"), {
+    destroy("/profile", {
       preserveScroll: true,
       onSuccess: () => closeModal(),
       onFinish: () => reset(),

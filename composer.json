@@ -1,6 +1,6 @@
 {
     "name": "justd/laravel",
-    "version": "1.4.16",
+    "version": "1.4.17",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
@@ -54,7 +54,7 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi",
-            "bun i --legacy-peer-deps"
+            "npm i"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",

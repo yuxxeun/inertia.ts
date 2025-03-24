@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Container } from "ui"
+import { Container } from "@/components/ui/container"
 import { twMerge } from "tailwind-merge"
 
 const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

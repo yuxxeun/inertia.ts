@@ -2,14 +2,9 @@ import { ThemeSwitcher } from "@/components/theme-switcher"
 import type { PageProps } from "@/types"
 import { usePage } from "@inertiajs/react"
 import {
-  IconArrowUpRight,
   IconBrandJustd,
-  IconBrandLaravel,
   IconChevronLgDown,
-  IconColorPalette,
-  IconColorSwatch,
   IconLogout,
-  IconPackage,
   IconSettings,
 } from "justd-icons"
 import { useState, useEffect } from "react"
@@ -48,75 +43,27 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
               {item.name}
             </Navbar.Item>
           ))}
-          <Menu>
-            <Navbar.Item className="group">
-              Resources...
-              <IconChevronLgDown className="ml-2 size-4 transition-transform group-data-pressed:rotate-180" />
-            </Navbar.Item>
-            <Menu.Content className="sm:min-w-48">
-              <Menu.Submenu>
-                <Menu.Item>
-                  <IconBrandJustdBlocks />
-                  <Menu.Label>Blocks</Menu.Label>
-                </Menu.Item>
-                <Menu.Content>
-                  <Menu.Item
-                    target="_blank"
-                    href="https://blocks.getjustd.com"
-                    className="justify-between"
-                  >
-                    <IconBrandJustdBlocks />
-                    <Menu.Label>Premium Blocks</Menu.Label>
-                  </Menu.Item>
-                  <Menu.Item
-                    target="_blank"
-                    href="https://getjustd.com/blocks"
-                    className="justify-between"
-                  >
-                    <IconBrandJustd />
-                    <Menu.Label>Basic Blocks</Menu.Label>
-                  </Menu.Item>
-                </Menu.Content>
-              </Menu.Submenu>
-              <Menu.Item target="_blank" href="https://getjustd.com" className="justify-between">
-                <IconPackage />
-                <Menu.Label>Components</Menu.Label>
-                <IconArrowUpRight />
-              </Menu.Item>
-              <Menu.Item
-                target="_blank"
-                href="https://getjustd.com/colors"
-                className="justify-between"
-              >
-                <IconColorSwatch />
-                <Menu.Label>Colors</Menu.Label>
-                <IconArrowUpRight />
-              </Menu.Item>
-              <Menu.Item
-                target="_blank"
-                href="https://getjustd.com/themes"
-                className="justify-between"
-              >
-                <IconColorPalette />
-                <Menu.Label>Themes</Menu.Label>
-                <IconArrowUpRight />
-              </Menu.Item>
-              <Menu.Item target="_blank" href="https://laravel.com" className="justify-between">
-                <IconBrandLaravel />
-                <Menu.Label>Laravel</Menu.Label>
-                <IconArrowUpRight />
-              </Menu.Item>
-            </Menu.Content>
-          </Menu>
+          <Navbar.Item
+            target="_blank"
+            href="https://blocks.getjustd.com"
+            className="justify-between"
+          >
+            <IconBrandJustdBlocks />
+            <Menu.Label>Blocks</Menu.Label>
+          </Navbar.Item>
+          <Navbar.Item target="_blank" href="https://getjustd.com" className="justify-between">
+            <IconBrandJustd />
+            <Menu.Label>Justd</Menu.Label>
+          </Navbar.Item>
         </Navbar.Section>
 
-        <Navbar.Section className="ml-auto hidden gap-x-1 lg:flex">
+        <Navbar.Section className="ml-auto hidden gap-x-2 lg:flex">
           {!auth.user && <ThemeSwitcher />}
           {auth.user ? (
             <UserMenu />
           ) : (
             <>
-              <Separator orientation="vertical" className="mr-2 h-6" />
+              <Separator orientation="vertical" className="h-6" />
               <Link
                 className={buttonStyles({
                   intent: "outline",
@@ -126,7 +73,6 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
               >
                 Login
               </Link>
-              <Navbar.Item href="/register">Register</Navbar.Item>
             </>
           )}
         </Navbar.Section>
@@ -145,18 +91,16 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           {auth.user ? (
             <UserMenu />
           ) : (
-            <>
-              <Link
-                className={buttonStyles({
-                  intent: "outline",
-                  size: "small",
-                  shape: "circle",
-                })}
-                href="/login"
-              >
-                Login
-              </Link>
-            </>
+            <Link
+              className={buttonStyles({
+                intent: "outline",
+                size: "small",
+                shape: "circle",
+              })}
+              href="/login"
+            >
+              Login
+            </Link>
           )}
         </Navbar.Flex>
       </Navbar.Compact>

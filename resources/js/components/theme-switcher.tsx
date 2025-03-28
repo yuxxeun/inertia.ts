@@ -4,18 +4,15 @@ import { useTheme } from "@/utils/use-theme"
 
 export function ThemeSwitcher({
   shape = "square",
-  intent = "plain",
+  intent = "outline",
   className,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { theme, updateTheme } = useTheme()
+  const { updateTheme } = useTheme()
 
   return (
     <Menu>
       <Button size="small" className="group" intent={intent}>
-        {theme === "dark" && <IconMoon />}
-        {theme === "light" && <IconSun />}
-        {theme === "system" && <IconDeviceDesktop2 />}
         Theme
         <IconChevronLgDown className="duration-200 group-data-pressed:rotate-180" />
       </Button>

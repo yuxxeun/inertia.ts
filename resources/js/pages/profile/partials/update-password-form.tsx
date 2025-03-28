@@ -12,7 +12,7 @@ export function UpdatePasswordForm() {
     password_confirmation: "",
   })
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     put("/password", {
       preserveScroll: true,

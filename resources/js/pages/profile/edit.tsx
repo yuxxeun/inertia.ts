@@ -1,7 +1,7 @@
 import { Header } from "@/components/header"
 import AppLayout from "@/layouts/app-layout"
 import { Head } from "@inertiajs/react"
-import { Container } from "ui"
+import { Container } from "@/components/ui/container"
 import { UpdateProfileInformationForm } from "./partials/update-profile-information-form"
 import { UpdatePasswordForm } from "./partials/update-password-form"
 import { DeleteUserForm } from "./partials/delete-user-form"

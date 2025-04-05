@@ -1,5 +1,9 @@
 import { useForm, usePage } from "@inertiajs/react"
-import { Button, Card, Form, Link, TextField } from "ui"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Form } from "@/components/ui/form"
+import { Link } from "@/components/ui/link"
+import { TextField } from "@/components/ui/text-field"
 import type { AuthenticatedUserProps } from "@/types"
 
 interface Props {

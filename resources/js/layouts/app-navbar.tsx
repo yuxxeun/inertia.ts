@@ -1,15 +1,15 @@
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import type { PageProps } from "@/types"
 import { usePage } from "@inertiajs/react"
-import {
-  IconBrandJustd,
-  IconChevronLgDown,
-  IconLogout,
-  IconSettings,
-} from "justd-icons"
+import { IconBrandJustd, IconChevronLgDown, IconLogout, IconSettings } from "justd-icons"
 import { useState, useEffect } from "react"
 import type { Selection } from "react-aria-components"
-import { Avatar, buttonStyles, Link, Menu, Navbar, Separator } from "ui"
+import { Avatar } from "@/components/ui/avatar"
+import { buttonStyles } from "@/components/ui/button"
+import { Link } from "@/components/ui/link"
+import { Menu } from "@/components/ui/menu"
+import { Navbar } from "@/components/ui/navbar"
+import { Separator } from "@/components/ui/separator"
 import { useTheme } from "@/utils/use-theme"
 import { Logo } from "@/components/logo"
 

@@ -1,7 +1,10 @@
 import { useForm } from "@inertiajs/react"
 import { useRef } from "react"
-import { toast } from "sonner"
-import { Button, Card, Form, TextField } from "ui"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Form } from "@/components/ui/form"
+import { TextField } from "@/components/ui/text-field"
+import password from "@/routes/password"
 
 export function UpdatePasswordForm() {
   const passwordInput = useRef<HTMLInputElement>(null)
@@ -14,10 +17,9 @@ export function UpdatePasswordForm() {
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    put("/password", {
+    put(password.update().url, {
       preserveScroll: true,
       onSuccess: () => {
-        toast.success("Your profile information has been updated.")
         reset()
       },
       onError: () => {

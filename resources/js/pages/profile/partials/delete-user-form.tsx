@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { useForm } from "@inertiajs/react"
 import { useState } from "react"
-import { Card, Modal, TextField } from "ui"
+import { Card } from "@/components/ui/card"
+import { Modal } from "@/components/ui/modal"
+import { TextField } from "@/components/ui/text-field"
+import profile from "@/routes/profile"
 
 export function DeleteUserForm() {
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
@@ -16,12 +19,8 @@ export function DeleteUserForm() {
     password: "",
   })
 
-  const confirmUserDeletion = () => {
-    setConfirmingUserDeletion(true)
-  }
-
   const deleteUser = () => {
-    destroy("/profile", {
+    destroy(profile.destroy().url, {
       preserveScroll: true,
       onSuccess: () => closeModal(),
       onFinish: () => reset(),
@@ -44,8 +43,10 @@ export function DeleteUserForm() {
         </Card.Description>
       </Card.Header>
       <Card.Content>
-        <Modal>
-          <Button intent="danger">Delete Account</Button>
+        <Modal onOpenChange={setConfirmingUserDeletion} isOpen={confirmingUserDeletion}>
+          <Button onPress={() => setConfirmingUserDeletion(true)} intent="danger">
+            Delete Account
+          </Button>
           <Modal.Content>
             <Modal.Header>
               <Modal.Title>Delete Account</Modal.Title>

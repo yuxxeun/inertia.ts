@@ -2,7 +2,7 @@ import type { FlashProps } from "@/types"
 import { usePage } from "@inertiajs/react"
 import { useEffect } from "react"
 import { toast } from "sonner"
-import { Toast } from "ui"
+import { Toast } from "@/components/ui/toast"
 
 export function Flash() {
   const { flash } = usePage<{ flash: FlashProps }>().props

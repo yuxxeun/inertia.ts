@@ -1,7 +1,10 @@
 import GuestLayout from "@/layouts/guest-layout"
 import { Head, useForm } from "@inertiajs/react"
 import { useEffect } from "react"
-import { Button, Form, TextField } from "ui"
+import { Button } from "@/components/ui/button"
+import { TextField } from "@/components/ui/text-field"
+import { Form } from "@/components/ui/form"
+import password from "@/routes/password"
 
 interface ResetPasswordProps {
   token: string
@@ -23,9 +26,9 @@ export default function ResetPassword(args: ResetPasswordProps) {
     }
   }, [])
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    post("/reset-password")
+    post(password.request().url)
   }
 
   return (

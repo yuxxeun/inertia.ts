@@ -1,5 +1,7 @@
 import type { SVGProps } from "react"
-import { Button, Link, TextField } from "ui"
+import { Button } from "@/components/ui/button"
+import { Link } from "@/components/ui/link"
+import { TextField } from "@/components/ui/text-field"
 
 const navigation = {
   solutions: [

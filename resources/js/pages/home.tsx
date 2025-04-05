@@ -9,7 +9,9 @@ import {
   IconDuplicateFill,
   IconWindowVisitFill,
 } from "justd-icons"
-import { Card, Container, Link } from "ui"
+import { Card } from "@/components/ui/card"
+import { Container } from "@/components/ui/container"
+import { Link } from "@/components/ui/link"
 
 const items = [
   {

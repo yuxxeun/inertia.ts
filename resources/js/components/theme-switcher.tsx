@@ -1,18 +1,17 @@
 import { IconChevronLgDown, IconDeviceDesktop2, IconMoon, IconSun } from "justd-icons"
-import { Button, Menu } from "ui"
+import { Button } from "@/components/ui/button"
+import { Menu } from "@/components/ui/menu"
 import { useTheme } from "@/utils/use-theme"
 
 export function ThemeSwitcher({
   shape = "square",
   intent = "outline",
-  className,
-  ...props
 }: React.ComponentProps<typeof Button>) {
   const { updateTheme } = useTheme()
 
   return (
     <Menu>
-      <Button size="small" className="group" intent={intent}>
+      <Button size="small" className="group" shape={shape} intent={intent}>
         Theme
         <IconChevronLgDown className="duration-200 group-data-pressed:rotate-180" />
       </Button>

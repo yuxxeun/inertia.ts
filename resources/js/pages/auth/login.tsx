@@ -2,7 +2,13 @@ import GuestLayout from "@/layouts/guest-layout"
 import { Head, useForm } from "@inertiajs/react"
 import type React from "react"
 import { useEffect } from "react"
-import { Button, Checkbox, Form, Link, TextField } from "ui"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Form } from "@/components/ui/form"
+import { Link } from "@/components/ui/link"
+import { TextField } from "@/components/ui/text-field"
+import login from "@/routes/login"
+import register from "@/routes/register"
 
 interface LoginProps {
   status: string
@@ -26,7 +32,7 @@ export default function Login(args: LoginProps) {
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
 
-    post("/login")
+    post(login().url)
   }
 
   return (
@@ -74,7 +80,7 @@ export default function Login(args: LoginProps) {
           Log in
         </Button>
         <div className="text-center">
-          <Link href="/register" className="sm:text-sm" intent="secondary">
+          <Link href={register().url} className="sm:text-sm" intent="secondary">
             Dont have account? Register
           </Link>
         </div>

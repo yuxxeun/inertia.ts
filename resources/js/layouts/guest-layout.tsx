@@ -2,7 +2,7 @@ import { Flash } from "@/components/flash"
 import { Logo } from "@/components/logo"
 import { Card } from "@/components/ui/card"
 import type { PropsWithChildren, ReactNode } from "react"
-import { Link } from "ui"
+import { Link } from "@/components/ui/link"
 
 interface GuestLayoutProps {
   header?: string | null

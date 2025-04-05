@@ -2,8 +2,12 @@ import GuestLayout from "@/layouts/guest-layout"
 import { Head, useForm } from "@inertiajs/react"
 import type React from "react"
 import { useEffect } from "react"
-import { Button, Form, Link, TextField } from "ui"
-
+import { Button } from "@/components/ui/button"
+import { Link } from "@/components/ui/link"
+import { TextField } from "@/components/ui/text-field"
+import { Form } from "@/components/ui/form"
+import login from "@/routes/login"
+import register from "@/routes/register"
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
@@ -19,10 +23,10 @@ export default function Register() {
     }
   }, [])
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    post("/register")
+    post(register().url)
   }
   return (
     <>
@@ -74,7 +78,7 @@ export default function Register() {
           Register
         </Button>
         <div className="text-center">
-          <Link href="/login" intent="secondary" className="sm:text-sm">
+          <Link href={login().url} intent="secondary" className="sm:text-sm">
             Already registered?
           </Link>
         </div>

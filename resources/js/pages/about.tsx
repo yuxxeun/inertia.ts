@@ -2,7 +2,8 @@ import { Header } from "@/components/header"
 import AppLayout from "@/layouts/app-layout"
 import { Head } from "@inertiajs/react"
 import type React from "react"
-import { Card, Container } from "ui"
+import { Card } from "@/components/ui/card"
+import { Container } from "@/components/ui/container"
 
 export default function About() {
   return (

@@ -1,8 +1,8 @@
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import type { PageProps } from "@/types"
 import { usePage } from "@inertiajs/react"
-import { IconBrandJustd, IconChevronLgDown, IconLogout, IconSettings } from "justd-icons"
-import { useState, useEffect } from "react"
+import { IconBrandIntentui, IconChevronLgDown, IconLogout, IconSettings } from "@intentui/icons"
+import { useEffect, useState } from "react"
 import type { Selection } from "react-aria-components"
 import { Avatar } from "@/components/ui/avatar"
 import { buttonStyles } from "@/components/ui/button"
@@ -45,15 +45,15 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           ))}
           <Navbar.Item
             target="_blank"
-            href="https://blocks.getjustd.com"
+            href="https://blocks.intentui.com"
             className="justify-between"
           >
-            <IconBrandJustdBlocks />
+            <IconBrandIntentui />
             <Menu.Label>Blocks</Menu.Label>
           </Navbar.Item>
-          <Navbar.Item target="_blank" href="https://getjustd.com" className="justify-between">
-            <IconBrandJustd />
-            <Menu.Label>Justd</Menu.Label>
+          <Navbar.Item target="_blank" href="https://intentui.com" className="justify-between">
+            <IconBrandIntentui />
+            <Menu.Label>Intent UI</Menu.Label>
           </Navbar.Item>
         </Navbar.Section>
 
@@ -171,13 +171,13 @@ function UserMenu() {
         </Menu.Submenu>
 
         <Menu.Separator />
-        <Menu.Item href="https://getjustd.com/button">
+        <Menu.Item href="https://intentui.com/button">
           <Menu.Label>Documenation</Menu.Label>
-          <IconBrandJustd />
+          <IconBrandIntentui />
         </Menu.Item>
-        <Menu.Item href="https://blocks.getjustd.com">
+        <Menu.Item href="https://blocks.intentui.com">
           <Menu.Label>Premium Blocks</Menu.Label>
-          <IconBrandJustdBlocks />
+          <IconBrandIntentui />
         </Menu.Item>
         <Menu.Separator />
         <Menu.Item routerOptions={{ method: "post" }} href="/logout">
@@ -186,56 +186,5 @@ function UserMenu() {
         </Menu.Item>
       </Menu.Content>
     </Menu>
-  )
-}
-
-export function IconBrandJustdBlocks() {
-  return (
-    <svg
-      data-slot="icon"
-      className="size-4.5 sm:size-5"
-      xmlns="http://www.w3.org/2000/svg"
-      height={24}
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <rect width={20} height={20} x={2} y={2} fill="#0D6DFD" rx="3.75" />
-      <g fill="#fff" filter="url(#a)" shapeRendering="crispEdges">
-        <path d="M5.36 6.311c0-.525.426-.952.951-.952h1.904c.526 0 .952.427.952.952v1.904a.95.95 0 0 1-.952.952H6.311a.95.95 0 0 1-.952-.952z" />
-        <path
-          d="M10.105 6.311c0-.525.426-.952.952-.952h1.904c.525 0 .952.427.952.952v1.904a.95.95 0 0 1-.952.952h-1.904a.95.95 0 0 1-.952-.952z"
-          fillOpacity=".5"
-        />
-        <path d="M14.85 6.311c0-.525.426-.952.952-.952h1.904c.526 0 .952.427.952.952v1.904a.95.95 0 0 1-.952.952h-1.904a.95.95 0 0 1-.952-.952z" />
-        <path
-          d="M14.85 11.057c0-.526.426-.952.952-.952h1.904c.526 0 .952.426.952.952v1.904a.95.95 0 0 1-.952.952h-1.904a.95.95 0 0 1-.952-.952z"
-          fillOpacity=".5"
-        />
-      </g>
-      <defs>
-        <filter
-          id="a"
-          width="13.426"
-          height="8.68"
-          x="5.296"
-          y="5.328"
-          colorInterpolationFilters="sRGB"
-          filterUnits="userSpaceOnUse"
-        >
-          <feFlood floodOpacity={0} result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            result="hardAlpha"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy=".032" />
-          <feGaussianBlur stdDeviation=".032" />
-          <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0" />
-          <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_74_56" />
-          <feBlend in="SourceGraphic" in2="effect1_dropShadow_74_56" result="shape" />
-        </filter>
-      </defs>
-    </svg>
   )
 }

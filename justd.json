@@ -1,5 +1,5 @@
 {
-  "$schema": "https://getjustd.com/schema.json",
+  "$schema": "https://intentui.com/schema.json",
   "ui": "resources/js/components/ui",
   "utils": "resources/js/utils",
   "gray": "zinc",

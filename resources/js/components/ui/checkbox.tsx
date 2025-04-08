@@ -1,4 +1,4 @@
-import { IconCheck, IconMinus } from "justd-icons"
+import { IconCheck, IconMinus } from "@intentui/icons"
 import type {
   CheckboxGroupProps as CheckboxGroupPrimitiveProps,
   CheckboxProps as CheckboxPrimitiveProps,

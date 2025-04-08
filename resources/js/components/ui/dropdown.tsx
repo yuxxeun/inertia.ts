@@ -1,4 +1,4 @@
-import { IconCheck } from "justd-icons"
+import { IconCheck } from "@intentui/icons"
 import type {
   ListBoxItemProps,
   SectionProps,

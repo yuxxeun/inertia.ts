@@ -1,7 +1,7 @@
 ### TL;DR
 
 ```bash
-laravel new app --using=justd/laravel
+laravel new app --using=intentui/laravel
 ```
 
 Make sure to update your `APP_URL` in the `.env` file before using the route function. Then, run `bun run dev` to generate and watch routes properly during development.

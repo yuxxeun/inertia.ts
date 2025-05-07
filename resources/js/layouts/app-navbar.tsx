@@ -3,14 +3,12 @@ import type { PageProps } from "@/types"
 import { usePage } from "@inertiajs/react"
 import { IconBrandIntentui, IconChevronLgDown, IconLogout, IconSettings } from "@intentui/icons"
 import { useEffect, useState } from "react"
-import type { Selection } from "react-aria-components"
 import { Avatar } from "@/components/ui/avatar"
 import { buttonStyles } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { Menu } from "@/components/ui/menu"
 import { Navbar } from "@/components/ui/navbar"
 import { Separator } from "@/components/ui/separator"
-import { useTheme } from "@/utils/use-theme"
 import { Logo } from "@/components/logo"
 
 const navigations = [
@@ -43,6 +41,9 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
               {item.name}
             </Navbar.Item>
           ))}
+          <Navbar.Item target="_blank" href="https://intentui.com" className="justify-between">
+            <Menu.Label>Documentation</Menu.Label>
+          </Navbar.Item>
           <Navbar.Item
             target="_blank"
             href="https://blocks.intentui.com"
@@ -50,10 +51,6 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           >
             <IconBrandIntentui />
             <Menu.Label>Blocks</Menu.Label>
-          </Navbar.Item>
-          <Navbar.Item target="_blank" href="https://intentui.com" className="justify-between">
-            <IconBrandIntentui />
-            <Menu.Label>Intent UI</Menu.Label>
           </Navbar.Item>
         </Navbar.Section>
 
@@ -87,7 +84,6 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           </Navbar.Logo>
         </Navbar.Flex>
         <Navbar.Flex className="gap-x-1">
-          {!auth.user && <ThemeSwitcher />}
           {auth.user ? (
             <UserMenu />
           ) : (
@@ -112,9 +108,6 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
 
 function UserMenu() {
   const { auth } = usePage<PageProps>().props
-  const { theme, updateTheme } = useTheme()
-  const currentTheme = theme || "system"
-  const [selectedTheme, setSelectedTheme] = useState<Selection>(new Set([currentTheme]))
   return (
     <Menu>
       <Menu.Trigger
@@ -144,32 +137,6 @@ function UserMenu() {
           <Menu.Label>Settings</Menu.Label>
           <IconSettings />
         </Menu.Item>
-        <Menu.Submenu>
-          <Menu.Item>
-            <Menu.Label>Preferences</Menu.Label>
-          </Menu.Item>
-          <Menu.Content
-            selectionMode="single"
-            selectedKeys={selectedTheme}
-            onSelectionChange={(keys) => {
-              setSelectedTheme(keys)
-              // @ts-ignore
-              updateTheme(keys.has("system") ? "system" : keys.has("dark") ? "dark" : "light")
-            }}
-            items={[
-              { name: "Light", value: "light" },
-              { name: "Dark", value: "dark" },
-              { name: "System", value: "system" },
-            ]}
-          >
-            {(item) => (
-              <Menu.Item id={item.value} textValue={item.name}>
-                <Menu.Label>{item.name}</Menu.Label>
-              </Menu.Item>
-            )}
-          </Menu.Content>
-        </Menu.Submenu>
-
         <Menu.Separator />
         <Menu.Item href="https://intentui.com/button">
           <Menu.Label>Documenation</Menu.Label>

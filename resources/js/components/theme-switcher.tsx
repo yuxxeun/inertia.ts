@@ -1,7 +1,7 @@
 import { IconChevronLgDown, IconDeviceDesktop2, IconMoon, IconSun } from "@intentui/icons"
 import { Button } from "@/components/ui/button"
 import { Menu } from "@/components/ui/menu"
-import { useTheme } from "@/utils/use-theme"
+import { useTheme } from "@/hooks/use-theme"
 
 export function ThemeSwitcher({
   shape = "square",

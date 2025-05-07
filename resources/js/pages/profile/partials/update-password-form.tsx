@@ -37,7 +37,7 @@ export function UpdatePasswordForm() {
   }
 
   return (
-    <Card>
+    <div className="space-y-6 py-8 sm:py-12">
       <Card.Header>
         <Card.Title>Update Password</Card.Title>
         <Card.Description>
@@ -86,6 +86,6 @@ export function UpdatePasswordForm() {
           </div>
         </Form>
       </Card.Content>
-    </Card>
+    </div>
   )
 }

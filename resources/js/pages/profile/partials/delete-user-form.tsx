@@ -33,7 +33,7 @@ export function DeleteUserForm() {
   }
 
   return (
-    <Card>
+    <div className="space-y-6 py-8 sm:py-12">
       <Card.Header>
         <Card.Title>Delete Account</Card.Title>
         <Card.Description>
@@ -76,6 +76,6 @@ export function DeleteUserForm() {
           </Modal.Content>
         </Modal>
       </Card.Content>
-    </Card>
+    </div>
   )
 }

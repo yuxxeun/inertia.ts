@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container"
 import { UpdateProfileInformationForm } from "./partials/update-profile-information-form"
 import { UpdatePasswordForm } from "./partials/update-password-form"
 import { DeleteUserForm } from "./partials/delete-user-form"
+import { SwitchTheme } from "@/pages/profile/partials/switch-theme"
 
 interface Props {
   mustVerifyEmail: boolean
@@ -19,10 +20,11 @@ export default function Edit({ mustVerifyEmail, status }: Props) {
       <Head title={title} />
       <Header title={title} />
       <Container>
-        <div className="flex max-w-3xl flex-col gap-y-6">
+        <div className="flex max-w-3xl flex-col divide-y">
           <UpdateProfileInformationForm mustVerifyEmail={mustVerifyEmail} status={status} />
           <UpdatePasswordForm />
           <DeleteUserForm />
+          <SwitchTheme />
         </div>
       </Container>
     </>

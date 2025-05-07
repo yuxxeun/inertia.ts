@@ -1,5 +1,6 @@
 import { createContext, use } from "react"
 
+import { composeTailwindRenderProps } from "@/lib/primitive"
 import { IconBulletFill, IconCheck, IconChevronLgRight } from "@intentui/icons"
 import type {
   ButtonProps,
@@ -31,7 +32,6 @@ import {
   dropdownSectionStyles,
 } from "./dropdown"
 import { PopoverContent } from "./popover"
-import { composeTailwindRenderProps } from "./primitive"
 
 interface MenuContextProps {
   respectScreen: boolean
@@ -101,9 +101,11 @@ const MenuContent = <T extends object>({
   className,
   showArrow = false,
   popoverClassName,
+  respectScreen = true,
   ...props
 }: MenuContentProps<T>) => {
-  const { respectScreen } = use(MenuContext)
+  const { respectScreen: respectScreenContext } = use(MenuContext)
+  const respectScreenInternal = respectScreen ?? respectScreenContext
   return (
     <PopoverContent
       isOpen={props.isOpen}

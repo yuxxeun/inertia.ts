@@ -16,7 +16,7 @@ import {
 } from "react-aria-components"
 import { tv } from "tailwind-variants"
 
-import { useMediaQuery } from "@/utils/use-media-query"
+import { useMediaQuery } from "@/hooks/use-media-query"
 import { twMerge } from "tailwind-merge"
 import type {
   DialogBodyProps,
@@ -24,7 +24,15 @@ import type {
   DialogHeaderProps,
   DialogTitleProps,
 } from "./dialog"
-import { Dialog } from "./dialog"
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "./dialog"
 
 type PopoverProps = DialogTriggerProps
 const Popover = (props: PopoverProps) => {
@@ -32,22 +40,22 @@ const Popover = (props: PopoverProps) => {
 }
 
 const PopoverTitle = ({ level = 2, className, ...props }: DialogTitleProps) => (
-  <Dialog.Title
+  <DialogTitle
     className={twMerge("sm:leading-none", level === 2 && "sm:text-lg", className)}
     {...props}
   />
 )
 
 const PopoverHeader = ({ className, ...props }: DialogHeaderProps) => (
-  <Dialog.Header className={twMerge("sm:p-4", className)} {...props} />
+  <DialogHeader className={twMerge("sm:p-4", className)} {...props} />
 )
 
 const PopoverFooter = ({ className, ...props }: DialogFooterProps) => (
-  <Dialog.Footer className={twMerge("sm:p-4", className)} {...props} />
+  <DialogFooter className={twMerge("sm:p-4", className)} {...props} />
 )
 
 const PopoverBody = ({ className, ref, ...props }: DialogBodyProps) => (
-  <Dialog.Body ref={ref} className={twMerge("sm:px-4 sm:pt-0", className)} {...props} />
+  <DialogBody ref={ref} className={twMerge("sm:px-4 sm:pt-0", className)} {...props} />
 )
 
 const content = tv({
@@ -124,6 +132,7 @@ const PopoverContent = ({
   const isSubmenuTrigger = popoverContext?.trigger === "SubmenuTrigger"
   const isMenu = isMenuTrigger || isSubmenuTrigger
   const isComboBoxTrigger = popoverContext?.trigger === "ComboBox"
+  const isPicker = isComboBoxTrigger || popoverContext?.trigger === "Select"
   const offset = showArrow ? 12 : 8
   const effectiveOffset = isSubmenuTrigger ? offset - 5 : offset
   return isMobile && respectScreen ? (
@@ -148,6 +157,7 @@ const PopoverContent = ({
       className={composeRenderProps(className, (className, renderProps) =>
         content({
           ...renderProps,
+          isPicker,
           className,
         }),
       )}
@@ -176,9 +186,9 @@ const PopoverContent = ({
   )
 }
 
-const PopoverTrigger = Dialog.Trigger
-const PopoverClose = Dialog.Close
-const PopoverDescription = Dialog.Description
+const PopoverTrigger = DialogTrigger
+const PopoverClose = DialogClose
+const PopoverDescription = DialogDescription
 
 Popover.Trigger = PopoverTrigger
 Popover.Close = PopoverClose

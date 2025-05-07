@@ -27,7 +27,7 @@ export function UpdateProfileInformationForm({ mustVerifyEmail, status, classNam
   }
 
   return (
-    <Card>
+    <div className="space-y-6 pb-8 sm:pb-12">
       <Card.Header>
         <Card.Title>Profile Information</Card.Title>
         <Card.Description>
@@ -89,6 +89,6 @@ export function UpdateProfileInformationForm({ mustVerifyEmail, status, classNam
           </div>
         </Form>
       </Card.Content>
-    </Card>
+    </div>
   )
 }

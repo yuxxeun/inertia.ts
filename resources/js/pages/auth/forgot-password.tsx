@@ -22,9 +22,9 @@ export default function ForgotPassword({ status }: ForgotPasswordProps) {
   return (
     <>
       <Head title="Forgot Password" />
-      {status && <div className="mb-4 font-medium text-sm text-success">{status}</div>}
+      {status && <div className="font-medium text-sm text-success">{status}</div>}
 
-      <Form validationErrors={errors} onSubmit={submit}>
+      <Form className="mt-4 space-y-4" validationErrors={errors} onSubmit={submit}>
         <TextField
           type="text"
           name="email"
@@ -35,7 +35,7 @@ export default function ForgotPassword({ status }: ForgotPasswordProps) {
           onChange={(v) => setData("email", v)}
         />
 
-        <div className="mt-4 flex items-center justify-end">
+        <div className="flex items-center justify-end">
           <Button type="submit" className="w-full" isDisabled={processing}>
             Email Password Reset Link
           </Button>

@@ -11,7 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Uncomment this when you have sidebar state
+        // $middleware->encryptCookies(except: ['sidebar:state']);
+
         $middleware->web(append: [
+            \App\Http\Middleware\HandleTheme::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);

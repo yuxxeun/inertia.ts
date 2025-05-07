@@ -72,9 +72,11 @@ const DropdownSection = <T extends object>({ className, ...props }: DropdownSect
 type DropdownItemProps = ListBoxItemProps
 
 const DropdownItem = ({ className, ...props }: DropdownItemProps) => {
+  const textValue =
+    props.textValue || (typeof props.children === "string" ? props.children : undefined)
   return (
     <ListBoxItemPrimitive
-      textValue={typeof props.children === "string" ? props.children : props.textValue}
+      textValue={textValue}
       className={composeRenderProps(className, (className, renderProps) =>
         dropdownItemStyles({ ...renderProps, className }),
       )}
@@ -153,7 +155,17 @@ const DropdownSeparator = ({ className, ...props }: SeparatorProps) => (
 )
 
 const DropdownKeyboard = ({ className, ...props }: React.ComponentProps<typeof Keyboard>) => {
-  return <Keyboard className={twMerge("absolute right-2 pl-2", className)} {...props} />
+  return (
+    <Keyboard
+      classNames={{
+        base: twMerge(
+          "absolute right-2 group-hover:text-primary-fg group-focus:text-primary-fg pl-2",
+          className,
+        ),
+      }}
+      {...props}
+    />
+  )
 }
 
 /**

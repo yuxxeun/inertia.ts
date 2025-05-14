@@ -44,19 +44,7 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
         </Navbar.Section>
 
         <Navbar.Section className="ml-auto hidden gap-x-2 lg:flex">
-          {auth.user ? (
-            <UserMenu />
-          ) : (
-            <Navbar.Item
-              className={buttonStyles({
-                intent: "outline",
-                size: "small",
-              })}
-              href="/login"
-            >
-              Login
-            </Navbar.Item>
-          )}
+          {auth.user ? <UserMenu /> : <Navbar.Item href="/login">Login</Navbar.Item>}
         </Navbar.Section>
       </Navbar.Nav>
 

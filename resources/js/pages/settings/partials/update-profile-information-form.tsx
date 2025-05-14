@@ -21,7 +21,7 @@ export function UpdateProfileInformationForm({ mustVerifyEmail, status, classNam
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    patch("/profile", {
+    patch("/settings/profile", {
       preserveScroll: true,
     })
   }

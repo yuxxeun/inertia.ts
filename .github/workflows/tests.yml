@@ -36,6 +36,9 @@ jobs:
       - name: Install Node Dependencies
         run: npm ci
 
+      - name: Generate ziggy
+        run: php artisan ziggy:generate
+
       - name: Build Assets
         run: npm run build
 

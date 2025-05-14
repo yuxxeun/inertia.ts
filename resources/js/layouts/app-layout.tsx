@@ -7,7 +7,8 @@ export default function AppLayout({ children }: PropsWithChildren) {
   return (
     <div>
       <Flash />
-      <AppNavbar>{children}</AppNavbar>
+      <AppNavbar />
+      {children}
       <Footer />
     </div>
   )

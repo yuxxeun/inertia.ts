@@ -15,7 +15,7 @@ export default function GuestLayout({
   children,
 }: PropsWithChildren<GuestLayoutProps>) {
   return (
-    <div className="flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">
+    <div className="flex min-h-screen flex-col items-center px-4 pt-6 sm:justify-center sm:pt-0">
       <Flash />
       <Link href="/">
         <Logo className="size-10" />

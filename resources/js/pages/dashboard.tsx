@@ -1,10 +1,10 @@
 import AppLayout from "@/layouts/app-layout"
-import type { PageProps } from "@/types"
 import { Head } from "@inertiajs/react"
 import { CardHeader } from "@/components/ui/card"
 import { Container } from "@/components/ui/container"
+import type { SharedData } from "@/types/shared"
 
-export default function Dashboard({ auth }: PageProps) {
+export default function Dashboard({ auth }: SharedData) {
   return (
     <>
       <Head title="Dashboard" />

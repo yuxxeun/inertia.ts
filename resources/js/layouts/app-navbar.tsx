@@ -1,15 +1,13 @@
-import { ThemeSwitcher } from "@/components/theme-switcher"
-import type { PageProps } from "@/types"
 import { usePage } from "@inertiajs/react"
 import { IconBrandIntentui, IconChevronLgDown, IconLogout, IconSettings } from "@intentui/icons"
 import { useEffect, useState } from "react"
 import { Avatar } from "@/components/ui/avatar"
 import { buttonStyles } from "@/components/ui/button"
-import { Link } from "@/components/ui/link"
 import { Menu } from "@/components/ui/menu"
 import { Navbar } from "@/components/ui/navbar"
 import { Separator } from "@/components/ui/separator"
 import { Logo } from "@/components/logo"
+import type { SharedData } from "@/types/shared"
 
 const navigations = [
   {
@@ -17,16 +15,11 @@ const navigations = [
     textValue: "Home",
     href: "/",
   },
-  {
-    name: "About",
-    textValue: "About",
-    href: "/about",
-  },
 ]
 
 export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Navbar>) {
   const page = usePage()
-  const { auth } = usePage<PageProps>().props
+  const { auth } = usePage<SharedData>().props
   const [isOpen, setIsOpen] = useState(false)
   useEffect(() => setIsOpen(false), [page.url])
   return (
@@ -44,33 +37,25 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           <Navbar.Item target="_blank" href="https://intentui.com" className="justify-between">
             <Menu.Label>Documentation</Menu.Label>
           </Navbar.Item>
-          <Navbar.Item
-            target="_blank"
-            href="https://blocks.intentui.com"
-            className="justify-between"
-          >
+          <Navbar.Item target="_blank" href="https://blocks.intentui.com">
             <IconBrandIntentui />
             <Menu.Label>Blocks</Menu.Label>
           </Navbar.Item>
         </Navbar.Section>
 
         <Navbar.Section className="ml-auto hidden gap-x-2 lg:flex">
-          {!auth.user && <ThemeSwitcher />}
           {auth.user ? (
             <UserMenu />
           ) : (
-            <>
-              <Separator orientation="vertical" className="h-6" />
-              <Link
-                className={buttonStyles({
-                  intent: "outline",
-                  size: "small",
-                })}
-                href="/login"
-              >
-                Login
-              </Link>
-            </>
+            <Navbar.Item
+              className={buttonStyles({
+                intent: "outline",
+                size: "small",
+              })}
+              href="/login"
+            >
+              Login
+            </Navbar.Item>
           )}
         </Navbar.Section>
       </Navbar.Nav>
@@ -87,16 +72,15 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           {auth.user ? (
             <UserMenu />
           ) : (
-            <Link
+            <Navbar.Item
               className={buttonStyles({
                 intent: "outline",
                 size: "small",
-                shape: "circle",
               })}
               href="/login"
             >
               Login
-            </Link>
+            </Navbar.Item>
           )}
         </Navbar.Flex>
       </Navbar.Compact>
@@ -107,7 +91,7 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
 }
 
 function UserMenu() {
-  const { auth } = usePage<PageProps>().props
+  const { auth } = usePage<SharedData>().props
   return (
     <Menu>
       <Menu.Trigger
@@ -133,7 +117,7 @@ function UserMenu() {
         <Menu.Item href="/dashboard">
           <Menu.Label>Dashboard</Menu.Label>
         </Menu.Item>
-        <Menu.Item href="/profile" className="justify-between">
+        <Menu.Item href="/settings/profile" className="justify-between">
           <Menu.Label>Settings</Menu.Label>
           <IconSettings />
         </Menu.Item>

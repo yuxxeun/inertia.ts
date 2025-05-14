@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { TextField } from "@/components/ui/text-field"
 import { Form } from "@/components/ui/form"
-import login from "@/routes/login"
-import register from "@/routes/register"
+
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
@@ -26,7 +25,7 @@ export default function Register() {
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    post(register().url)
+    post("/register")
   }
   return (
     <>
@@ -78,7 +77,7 @@ export default function Register() {
           Register
         </Button>
         <div className="text-center">
-          <Link href={login().url} intent="secondary" className="sm:text-sm">
+          <Link href="/login" intent="secondary" className="sm:text-sm">
             Already registered?
           </Link>
         </div>
@@ -87,8 +86,10 @@ export default function Register() {
   )
 }
 
-Register.layout = (page: React.ReactNode) => {
-  return (
-    <GuestLayout header="Register" description="Register for your new account." children={page} />
-  )
-}
+Register.layout = (page: React.ReactNode) => (
+  <GuestLayout
+    header="Register"
+    description="Create a new account to start managing your clinic efficiently."
+    children={page}
+  />
+)

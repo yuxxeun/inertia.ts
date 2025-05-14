@@ -50,4 +50,4 @@ export default function ConfirmPassword() {
   )
 }
 
-ConfirmPassword.layout = (page: any) => <GuestLayout children={page} />
+ConfirmPassword.layout = (page: any) => <GuestLayout header="Confirm password" children={page} />

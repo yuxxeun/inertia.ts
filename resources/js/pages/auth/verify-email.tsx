@@ -4,15 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { Link } from "@/components/ui/link"
 
-import verification from "@/routes/verification"
-
 export default function VerifyEmail({ status }: { status?: any }) {
   const { post, processing } = useForm()
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    post(verification.send().url)
+    post(route("verification.send"))
   }
   return (
     <>
@@ -32,7 +30,7 @@ export default function VerifyEmail({ status }: { status?: any }) {
         </Form>
 
         <Link
-          href={"/logout"}
+          href="/logout"
           routerOptions={{
             method: "post",
           }}

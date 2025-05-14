@@ -4,7 +4,6 @@ import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { TextField } from "@/components/ui/text-field"
 import { Form } from "@/components/ui/form"
-import password from "@/routes/password"
 
 interface ResetPasswordProps {
   token: string
@@ -28,7 +27,7 @@ export default function ResetPassword(args: ResetPasswordProps) {
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    post(password.request().url)
+    post(route("password.request"))
   }
 
   return (
@@ -80,4 +79,10 @@ export default function ResetPassword(args: ResetPasswordProps) {
   )
 }
 
-ResetPassword.layout = (page: any) => <GuestLayout children={page} />
+ResetPassword.layout = (page: any) => (
+  <GuestLayout
+    header="Reset Password"
+    description="Please enter your email address and new password to reset your password."
+    children={page}
+  />
+)

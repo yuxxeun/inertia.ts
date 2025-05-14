@@ -7,8 +7,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Form } from "@/components/ui/form"
 import { Link } from "@/components/ui/link"
 import { TextField } from "@/components/ui/text-field"
-import login from "@/routes/login"
-import register from "@/routes/register"
 
 interface LoginProps {
   status: string
@@ -32,7 +30,7 @@ export default function Login(args: LoginProps) {
   const submit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
 
-    post(login().url)
+    post("/login")
   }
 
   return (
@@ -40,7 +38,9 @@ export default function Login(args: LoginProps) {
       <Head title="Log in" />
 
       {status && (
-        <div className="mb-4 font-medium text-green-600 text-sm dark:text-green-400">{status}</div>
+        <div className="mb-4 font-medium text-emerald-600 text-sm dark:text-emerald-400">
+          {status}
+        </div>
       )}
 
       <Form validationErrors={errors} onSubmit={submit} className="flex flex-col gap-y-4">
@@ -80,7 +80,7 @@ export default function Login(args: LoginProps) {
           Log in
         </Button>
         <div className="text-center">
-          <Link href={register().url} className="sm:text-sm" intent="secondary">
+          <Link href="/register" className="sm:text-sm" intent="secondary">
             Dont have account? Register
           </Link>
         </div>
@@ -89,6 +89,10 @@ export default function Login(args: LoginProps) {
   )
 }
 
-Login.layout = (page: React.ReactNode) => {
-  return <GuestLayout header="Login" description="Log in to your account." children={page} />
-}
+Login.layout = (page: React.ReactNode) => (
+  <GuestLayout
+    header="Login"
+    description="Access your account to manage appointments, prescriptions, and more."
+    children={page}
+  />
+)

@@ -5,12 +5,12 @@ on:
     branches:
       - develop
       - main
-      - laravel-12x
+      - laravel-12.x
   pull_request:
     branches:
       - develop
       - main
-      - laravel-12x
+      - laravel-12.x
 
 permissions:
   contents: write

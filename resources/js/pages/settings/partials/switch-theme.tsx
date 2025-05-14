@@ -55,8 +55,7 @@ export function SwitchTheme() {
             <Choicebox.Item
               id={item.value}
               textValue={item.label}
-              title={item.label}
-              icon={item.icon}
+              label={item.label}
               description={item.description}
             />
           )}

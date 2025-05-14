@@ -1,11 +1,4 @@
-import type { DialogProps, DialogTriggerProps, ModalOverlayProps } from "react-aria-components"
-import {
-  DialogTrigger,
-  ModalOverlay,
-  Modal as ModalPrimitive,
-  composeRenderProps,
-} from "react-aria-components"
-import { type VariantProps, tv } from "tailwind-variants"
+"use client"
 
 import {
   Dialog,
@@ -16,10 +9,19 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./dialog"
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import type { DialogProps, DialogTriggerProps, ModalOverlayProps } from "react-aria-components"
+import {
+  DialogTrigger as DialogTriggerPrimitive,
+  ModalOverlay,
+  Modal as ModalPrimitive,
+  composeRenderProps,
+} from "react-aria-components"
+import { type VariantProps, tv } from "tailwind-variants"
 
 const Modal = (props: DialogTriggerProps) => {
-  return <DialogTrigger {...props} />
+  return <DialogTriggerPrimitive {...props} />
 }
 
 const modalOverlayStyles = tv({

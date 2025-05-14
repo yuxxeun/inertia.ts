@@ -1,3 +1,5 @@
+"use client"
+
 import type {
   DialogProps,
   DialogTriggerProps,
@@ -5,7 +7,7 @@ import type {
   PopoverProps as PopoverPrimitiveProps,
 } from "react-aria-components"
 import {
-  DialogTrigger,
+  DialogTrigger as DialogTriggerPrimitive,
   Modal,
   ModalOverlay,
   OverlayArrow,
@@ -16,14 +18,12 @@ import {
 } from "react-aria-components"
 import { tv } from "tailwind-variants"
 
-import { useMediaQuery } from "@/hooks/use-media-query"
-import { twMerge } from "tailwind-merge"
 import type {
   DialogBodyProps,
   DialogFooterProps,
   DialogHeaderProps,
   DialogTitleProps,
-} from "./dialog"
+} from "@/components/ui/dialog"
 import {
   Dialog,
   DialogBody,
@@ -32,11 +32,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./dialog"
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { useMediaQuery } from "@/hooks/use-media-query"
+import { twMerge } from "tailwind-merge"
 
 type PopoverProps = DialogTriggerProps
 const Popover = (props: PopoverProps) => {
-  return <DialogTrigger {...props} />
+  return <DialogTriggerPrimitive {...props} />
 }
 
 const PopoverTitle = ({ level = 2, className, ...props }: DialogTitleProps) => (
@@ -64,7 +67,7 @@ const content = tv({
   ],
   variants: {
     isPicker: {
-      true: "max-h-72 min-w-(--trigger-width) overflow-y-auto",
+      true: "min-w-(--trigger-width)",
       false: "min-w-80",
     },
     isMenu: {

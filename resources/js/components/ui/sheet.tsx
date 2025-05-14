@@ -1,5 +1,12 @@
+"use client"
+
 import type { DialogProps, DialogTriggerProps, ModalOverlayProps } from "react-aria-components"
-import { DialogTrigger, Modal, ModalOverlay, composeRenderProps } from "react-aria-components"
+import {
+  DialogTrigger as DialogTriggerPrimitive,
+  Modal,
+  ModalOverlay,
+  composeRenderProps,
+} from "react-aria-components"
 import { type VariantProps, tv } from "tailwind-variants"
 
 import {
@@ -11,7 +18,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./dialog"
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 const overlayStyles = tv({
   base: [
@@ -73,7 +81,7 @@ const contentStyles = tv({
 
 type SheetProps = DialogTriggerProps
 const Sheet = (props: SheetProps) => {
-  return <DialogTrigger {...props} />
+  return <DialogTriggerPrimitive {...props} />
 }
 
 interface SheetContentProps

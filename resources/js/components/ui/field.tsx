@@ -1,3 +1,5 @@
+"use client"
+
 import type {
   FieldErrorProps as FieldErrorPrimitiveProps,
   GroupProps,
@@ -131,5 +133,5 @@ const Input = ({ className, ref, ...props }: InputProps) => {
   )
 }
 
-export type { FieldProps, InputProps, FieldErrorProps }
+export type { FieldProps, InputProps, DescriptionProps, FieldErrorProps }
 export { Description, FieldError, FieldGroup, Input, Label, fieldStyles }

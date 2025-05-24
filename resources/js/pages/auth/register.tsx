@@ -89,7 +89,7 @@ export default function Register() {
 Register.layout = (page: React.ReactNode) => (
   <GuestLayout
     header="Register"
-    description="Create a new account to start managing your clinic efficiently."
+    description="Create a new account to start managing your account efficiently."
     children={page}
   />
 )

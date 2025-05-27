@@ -1,34 +1,20 @@
-import { Separator as Divider, type SeparatorProps as DividerProps } from "react-aria-components"
-import { tv } from "tailwind-variants"
+"use client"
 
-const separatorStyles = tv({
-  base: "shrink-0 bg-border forced-colors:bg-[ButtonBorder]",
-  variants: {
-    orientation: {
-      horizontal: "h-px w-full",
-      vertical: "w-px",
-    },
-  },
-  defaultVariants: {
-    orientation: "horizontal",
-  },
-})
+import { Separator as Divider, type SeparatorProps } from "react-aria-components"
+import { twMerge } from "tailwind-merge"
 
-interface SeparatorProps extends DividerProps {
-  className?: string
-}
-
-const Separator = ({ className, ...props }: SeparatorProps) => {
+const Separator = ({ orientation = "horizontal", className, ...props }: SeparatorProps) => {
   return (
     <Divider
       {...props}
-      className={separatorStyles({
-        orientation: props.orientation,
-        className: className,
-      })}
+      className={twMerge(
+        "shrink-0 bg-border forced-colors:bg-[ButtonBorder]",
+        orientation === "horizontal" ? "h-px w-full" : "h-full w-px",
+        className,
+      )}
     />
   )
 }
 
-export { Separator }
 export type { SeparatorProps }
+export { Separator }

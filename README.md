@@ -1,25 +1,10 @@
 ### TL;DR
 
 ```bash
-composer create-project justd/laravel your-project-name
+laravel new app --using=intentui/laravel
 ```
 
-## Using NPM
-
-If you're using NPM, make sure to include the `--legacy-peer-deps` flag:
-
-```bash
-npm i --legacy-peer-deps
-composer run dev
-```
-
-## Using Bun
-
-```bash
-bun i && composer run dev
-```
-
-You must run `bun run dev` to ensure the routes are generated and watched properly during development.
+Make sure to update your `APP_URL` in the `.env` file before using the route function. Then, run `bun run dev` to generate and watch routes properly during development.
 
 ### Laravel Inertia React with TypeScript
 
@@ -29,10 +14,8 @@ By default, packages like Laravel Breeze use regular JavaScript for React. Howev
 
 - Authentication
 - User Profile
-- User Password Management
+- User Password
 - User Deletion
-- User Resources (`--only=[index, show, edit, update, destroy]`)
-- Pagination
 
 ### Quick Login
 

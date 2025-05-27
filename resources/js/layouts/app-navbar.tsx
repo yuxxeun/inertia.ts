@@ -1,21 +1,13 @@
-import { ThemeSwitcher } from "@/components/theme-switcher"
-import type { PagePropsData } from "@/types"
 import { usePage } from "@inertiajs/react"
-import {
-  IconArrowUpRight,
-  IconBrandJustd,
-  IconBrandLaravel,
-  IconChevronLgDown,
-  IconColorPalette,
-  IconColorSwatch,
-  IconLogout,
-  IconPackage,
-  IconSettings,
-} from "justd-icons"
-import { useState, useEffect } from "react"
-import type { Selection } from "react-aria-components"
-import { Avatar, buttonStyles, Link, Menu, Navbar, Separator } from "ui"
-import { useTheme } from "@/utils/use-theme"
+import { IconBrandIntentui, IconChevronLgDown, IconLogout, IconSettings } from "@intentui/icons"
+import { useEffect, useState } from "react"
+import { Avatar } from "@/components/ui/avatar"
+import { buttonStyles } from "@/components/ui/button"
+import { Menu } from "@/components/ui/menu"
+import { Navbar } from "@/components/ui/navbar"
+import { Separator } from "@/components/ui/separator"
+import { Logo } from "@/components/logo"
+import type { SharedData } from "@/types/shared"
 
 const navigations = [
   {
@@ -23,23 +15,18 @@ const navigations = [
     textValue: "Home",
     href: "/",
   },
-  {
-    name: "About",
-    textValue: "About",
-    href: "/about",
-  },
 ]
 
 export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Navbar>) {
   const page = usePage()
-  const { auth } = usePage<PagePropsData>().props
+  const { auth } = usePage<SharedData>().props
   const [isOpen, setIsOpen] = useState(false)
   useEffect(() => setIsOpen(false), [page.url])
   return (
     <Navbar isOpen={isOpen} onOpenChange={setIsOpen} {...props}>
       <Navbar.Nav>
         <Navbar.Logo aria-label="Logo">
-          <IconBrandLaravel className="size-6" />
+          <Logo />
         </Navbar.Logo>
         <Navbar.Section>
           {navigations.map((item) => (
@@ -47,84 +34,17 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
               {item.name}
             </Navbar.Item>
           ))}
-          <Menu>
-            <Navbar.Item className="group">
-              Resources...
-              <IconChevronLgDown className="ml-2 size-4 transition-transform group-data-pressed:rotate-180" />
-            </Navbar.Item>
-            <Menu.Content className="sm:min-w-48">
-              <Menu.Submenu>
-                <Menu.Item>
-                  <IconBrandJustdBlocks />
-                  <Menu.Label>Blocks</Menu.Label>
-                </Menu.Item>
-                <Menu.Content>
-                  <Menu.Item
-                    target="_blank"
-                    href="https://blocks.getjustd.com"
-                    className="justify-between"
-                  >
-                    <IconBrandJustdBlocks />
-                    <Menu.Label>Premium Blocks</Menu.Label>
-                  </Menu.Item>
-                  <Menu.Item
-                    target="_blank"
-                    href="https://getjustd.com/blocks"
-                    className="justify-between"
-                  >
-                    <IconBrandJustd />
-                    <Menu.Label>Basic Blocks</Menu.Label>
-                  </Menu.Item>
-                </Menu.Content>
-              </Menu.Submenu>
-              <Menu.Item target="_blank" href="https://getjustd.com" className="justify-between">
-                <IconPackage />
-                <Menu.Label>Components</Menu.Label>
-                <IconArrowUpRight />
-              </Menu.Item>
-              <Menu.Item
-                target="_blank"
-                href="https://getjustd.com/colors"
-                className="justify-between"
-              >
-                <IconColorSwatch />
-                <Menu.Label>Colors</Menu.Label>
-                <IconArrowUpRight />
-              </Menu.Item>
-              <Menu.Item
-                target="_blank"
-                href="https://getjustd.com/themes"
-                className="justify-between"
-              >
-                <IconColorPalette />
-                <Menu.Label>Themes</Menu.Label>
-                <IconArrowUpRight />
-              </Menu.Item>
-              <Menu.Item target="_blank" href="https://laravel.com" className="justify-between">
-                <IconBrandLaravel />
-                <Menu.Label>Laravel</Menu.Label>
-                <IconArrowUpRight />
-              </Menu.Item>
-            </Menu.Content>
-          </Menu>
+          <Navbar.Item target="_blank" href="https://intentui.com" className="justify-between">
+            <Menu.Label>Documentation</Menu.Label>
+          </Navbar.Item>
+          <Navbar.Item target="_blank" href="https://blocks.intentui.com">
+            <IconBrandIntentui />
+            <Menu.Label>Blocks</Menu.Label>
+          </Navbar.Item>
         </Navbar.Section>
 
-        <Navbar.Section className="ml-auto hidden gap-x-1 lg:flex">
-          {!auth.user && <ThemeSwitcher />}
-          {auth.user ? (
-            <UserMenu />
-          ) : (
-            <>
-              <Separator orientation="vertical" className="mr-2 h-6" />
-              <Link
-                className={buttonStyles({ appearance: "outline", size: "small" })}
-                href={route("login")}
-              >
-                Login
-              </Link>
-              <Navbar.Item href={route("register")}>Register</Navbar.Item>
-            </>
-          )}
+        <Navbar.Section className="ml-auto hidden gap-x-2 lg:flex">
+          {auth.user ? <UserMenu /> : <Navbar.Item href="/login">Login</Navbar.Item>}
         </Navbar.Section>
       </Navbar.Nav>
 
@@ -133,22 +53,22 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           <Navbar.Trigger />
           <Separator className="h-6" orientation="vertical" />
           <Navbar.Logo aria-label="Logo">
-            <IconBrandLaravel />
+            <Logo />
           </Navbar.Logo>
         </Navbar.Flex>
         <Navbar.Flex className="gap-x-1">
-          {!auth.user && <ThemeSwitcher />}
           {auth.user ? (
             <UserMenu />
           ) : (
-            <>
-              <Link
-                className={buttonStyles({ appearance: "outline", size: "small", shape: "circle" })}
-                href={route("login")}
-              >
-                Login
-              </Link>
-            </>
+            <Navbar.Item
+              className={buttonStyles({
+                intent: "outline",
+                size: "small",
+              })}
+              href="/login"
+            >
+              Login
+            </Navbar.Item>
           )}
         </Navbar.Flex>
       </Navbar.Compact>
@@ -159,10 +79,7 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
 }
 
 function UserMenu() {
-  const { auth } = usePage<PagePropsData>().props
-  const { theme, updateTheme } = useTheme()
-  const currentTheme = theme || "system"
-  const [selectedTheme, setSelectedTheme] = useState<Selection>(new Set([currentTheme]))
+  const { auth } = usePage<SharedData>().props
   return (
     <Menu>
       <Menu.Trigger
@@ -185,95 +102,28 @@ function UserMenu() {
             </div>
           </Menu.Header>
         </Menu.Section>
-        <Menu.Item href={route("dashboard")}>
+        <Menu.Item href="/dashboard">
           <Menu.Label>Dashboard</Menu.Label>
         </Menu.Item>
-        <Menu.Item href={route("profile.edit")} className="justify-between">
+        <Menu.Item href="/settings/profile" className="justify-between">
           <Menu.Label>Settings</Menu.Label>
           <IconSettings />
         </Menu.Item>
-        <Menu.Submenu>
-          <Menu.Item>
-            <Menu.Label>Preferences</Menu.Label>
-          </Menu.Item>
-          <Menu.Content
-            selectionMode="single"
-            selectedKeys={selectedTheme}
-            onSelectionChange={(keys) => {
-              setSelectedTheme(keys)
-              // @ts-ignore
-              updateTheme(keys.has("system") ? "system" : keys.has("dark") ? "dark" : "light")
-            }}
-            items={[
-              { name: "Light", value: "light" },
-              { name: "Dark", value: "dark" },
-              { name: "System", value: "system" },
-            ]}
-          >
-            {(item) => (
-              <Menu.Item id={item.value} textValue={item.name}>
-                <Menu.Label>{item.name}</Menu.Label>
-              </Menu.Item>
-            )}
-          </Menu.Content>
-        </Menu.Submenu>
-
         <Menu.Separator />
-        <Menu.Item routerOptions={{ method: "post" }} href={route("logout")}>
+        <Menu.Item href="https://intentui.com/button">
+          <Menu.Label>Documenation</Menu.Label>
+          <IconBrandIntentui />
+        </Menu.Item>
+        <Menu.Item href="https://blocks.intentui.com">
+          <Menu.Label>Premium Blocks</Menu.Label>
+          <IconBrandIntentui />
+        </Menu.Item>
+        <Menu.Separator />
+        <Menu.Item routerOptions={{ method: "post" }} href="/logout">
           <Menu.Label>Logout</Menu.Label>
           <IconLogout />
         </Menu.Item>
       </Menu.Content>
     </Menu>
-  )
-}
-
-export function IconBrandJustdBlocks() {
-  return (
-    <svg
-      className="size-4.5 sm:size-5"
-      xmlns="http://www.w3.org/2000/svg"
-      height={24}
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <rect width={20} height={20} x={2} y={2} fill="#0D6DFD" rx="3.75" />
-      <g fill="#fff" filter="url(#a)" shapeRendering="crispEdges">
-        <path d="M5.36 6.311c0-.525.426-.952.951-.952h1.904c.526 0 .952.427.952.952v1.904a.95.95 0 0 1-.952.952H6.311a.95.95 0 0 1-.952-.952z" />
-        <path
-          d="M10.105 6.311c0-.525.426-.952.952-.952h1.904c.525 0 .952.427.952.952v1.904a.95.95 0 0 1-.952.952h-1.904a.95.95 0 0 1-.952-.952z"
-          fillOpacity=".5"
-        />
-        <path d="M14.85 6.311c0-.525.426-.952.952-.952h1.904c.526 0 .952.427.952.952v1.904a.95.95 0 0 1-.952.952h-1.904a.95.95 0 0 1-.952-.952z" />
-        <path
-          d="M14.85 11.057c0-.526.426-.952.952-.952h1.904c.526 0 .952.426.952.952v1.904a.95.95 0 0 1-.952.952h-1.904a.95.95 0 0 1-.952-.952z"
-          fillOpacity=".5"
-        />
-      </g>
-      <defs>
-        <filter
-          id="a"
-          width="13.426"
-          height="8.68"
-          x="5.296"
-          y="5.328"
-          colorInterpolationFilters="sRGB"
-          filterUnits="userSpaceOnUse"
-        >
-          <feFlood floodOpacity={0} result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            result="hardAlpha"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy=".032" />
-          <feGaussianBlur stdDeviation=".032" />
-          <feComposite in2="hardAlpha" operator="out" />
-          <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0" />
-          <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_74_56" />
-          <feBlend in="SourceGraphic" in2="effect1_dropShadow_74_56" result="shape" />
-        </filter>
-      </defs>
-    </svg>
   )
 }

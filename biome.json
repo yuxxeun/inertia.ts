@@ -10,7 +10,16 @@
     },
     "files": {
         "ignoreUnknown": false,
-        "ignore": ["vendor", "node_modules", "resources/js/ziggy.js"]
+        "ignore": [
+            "public",
+            "bootstrap",
+            "resources/js/routes",
+            "resources/js/actions",
+            "resources/js/wayfinder",
+            "resources/js/ziggy.js",
+            "vendor",
+            "node_modules"
+        ]
     },
     "linter": {
         "enabled": true,
@@ -45,8 +54,16 @@
                     "level": "error",
                     "fix": "safe",
                     "options": {
-                        "attributes": ["classList"],
-                        "functions": ["cn", "twJoin", "tv", "composeRenderProps", "composeTailwindRenderProps"]
+                        "attributes": [
+                            "classList"
+                        ],
+                        "functions": [
+                            "cn",
+                            "twJoin",
+                            "tv",
+                            "composeRenderProps",
+                            "composeTailwindRenderProps"
+                        ]
                     }
                 }
             }

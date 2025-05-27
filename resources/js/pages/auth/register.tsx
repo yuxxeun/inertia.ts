@@ -2,7 +2,10 @@ import GuestLayout from "@/layouts/guest-layout"
 import { Head, useForm } from "@inertiajs/react"
 import type React from "react"
 import { useEffect } from "react"
-import { Button, Form, Link, TextField } from "ui"
+import { Button } from "@/components/ui/button"
+import { Link } from "@/components/ui/link"
+import { TextField } from "@/components/ui/text-field"
+import { Form } from "@/components/ui/form"
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -19,7 +22,7 @@ export default function Register() {
     }
   }, [])
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     post("/register")
@@ -50,28 +53,26 @@ export default function Register() {
           errorMessage={errors.email}
           isRequired
         />
-        <div className="grid grid-cols-2 gap-4">
-          <TextField
-            type="password"
-            name="password"
-            label="Password"
-            value={data.password}
-            autoComplete="current-password"
-            onChange={(v) => setData("password", v)}
-            errorMessage={errors.password}
-            isRequired
-          />
+        <TextField
+          type="password"
+          name="password"
+          label="Password"
+          value={data.password}
+          autoComplete="current-password"
+          onChange={(v) => setData("password", v)}
+          errorMessage={errors.password}
+          isRequired
+        />
 
-          <TextField
-            type="password"
-            label="Confirm Password"
-            name="password_confirmation"
-            value={data.password_confirmation}
-            onChange={(v) => setData("password_confirmation", v)}
-            errorMessage={errors.password_confirmation}
-            isRequired
-          />
-        </div>
+        <TextField
+          type="password"
+          label="Confirm Password"
+          name="password_confirmation"
+          value={data.password_confirmation}
+          onChange={(v) => setData("password_confirmation", v)}
+          errorMessage={errors.password_confirmation}
+          isRequired
+        />
         <Button type="submit" className="w-full" isDisabled={processing}>
           Register
         </Button>
@@ -85,8 +86,10 @@ export default function Register() {
   )
 }
 
-Register.layout = (page: React.ReactNode) => {
-  return (
-    <GuestLayout header="Register" description="Register for your new account." children={page} />
-  )
-}
+Register.layout = (page: React.ReactNode) => (
+  <GuestLayout
+    header="Register"
+    description="Create a new account to start managing your account efficiently."
+    children={page}
+  />
+)

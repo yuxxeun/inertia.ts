@@ -1,8 +1,8 @@
-import { FlashMessage } from "@/components/flash-message"
+import { Flash } from "@/components/flash"
 import { Logo } from "@/components/logo"
 import { Card } from "@/components/ui/card"
 import type { PropsWithChildren, ReactNode } from "react"
-import { Link } from "ui"
+import { Link } from "@/components/ui/link"
 
 interface GuestLayoutProps {
   header?: string | null
@@ -15,20 +15,18 @@ export default function GuestLayout({
   children,
 }: PropsWithChildren<GuestLayoutProps>) {
   return (
-    <div className="flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">
-      <FlashMessage />
-      <Link href={route("home")}>
-        <Logo className="mx-auto size-8" />
+    <div className="flex min-h-screen flex-col items-center px-4 pt-6 sm:justify-center sm:pt-0">
+      <Flash />
+      <Link href="/">
+        <Logo className="size-10" />
       </Link>
 
-      <div className="mt-10 w-full max-w-lg">
-        <Card className="rounded-none border-r-transparent border-l-transparent shadow-none sm:rounded-lg sm:border-r-border sm:border-l-border sm:shadow-sm lg:rounded-xl ">
-          <Card.Header>
-            <Card.Title>{header}</Card.Title>
-            <Card.Description>{description}</Card.Description>
-          </Card.Header>
-          <Card.Content>{children}</Card.Content>
-        </Card>
+      <div className="mt-6 w-full max-w-sm">
+        <Card.Header className="text-center">
+          <Card.Title>{header}</Card.Title>
+          <Card.Description>{description}</Card.Description>
+        </Card.Header>
+        <Card.Content>{children}</Card.Content>
       </div>
     </div>
   )

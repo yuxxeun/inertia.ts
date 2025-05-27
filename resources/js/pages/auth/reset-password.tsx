@@ -1,7 +1,9 @@
 import GuestLayout from "@/layouts/guest-layout"
 import { Head, useForm } from "@inertiajs/react"
 import { useEffect } from "react"
-import { Button, Form, TextField } from "ui"
+import { Button } from "@/components/ui/button"
+import { TextField } from "@/components/ui/text-field"
+import { Form } from "@/components/ui/form"
 
 interface ResetPasswordProps {
   token: string
@@ -23,9 +25,9 @@ export default function ResetPassword(args: ResetPasswordProps) {
     }
   }, [])
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    post("/reset-password")
+    post(route("password.request"))
   }
 
   return (
@@ -77,4 +79,10 @@ export default function ResetPassword(args: ResetPasswordProps) {
   )
 }
 
-ResetPassword.layout = (page: any) => <GuestLayout children={page} />
+ResetPassword.layout = (page: any) => (
+  <GuestLayout
+    header="Reset Password"
+    description="Please enter your email address and new password to reset your password."
+    children={page}
+  />
+)

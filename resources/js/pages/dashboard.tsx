@@ -1,15 +1,19 @@
 import AppLayout from "@/layouts/app-layout"
-import type { PagePropsData } from "@/types"
 import { Head } from "@inertiajs/react"
-import { Card, Container } from "ui"
+import { CardHeader } from "@/components/ui/card"
+import { Container } from "@/components/ui/container"
+import type { SharedData } from "@/types/shared"
 
-export default function Dashboard({ auth }: PagePropsData) {
+export default function Dashboard({ auth }: SharedData) {
   return (
     <>
       <Head title="Dashboard" />
 
       <Container className="py-12">
-        <Card className="w-full p-6">Hello, {auth.user.name}!</Card>
+        <CardHeader
+          title="Dashboard"
+          description={`Hello, ${auth.user.name}! This is your dashboard.`}
+        />
       </Container>
     </>
   )

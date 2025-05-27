@@ -1,7 +1,7 @@
-import { cn } from "@/utils/classes"
-import { IconBrandLaravel } from "justd-icons"
+import { IconBrandIntentui } from "@intentui/icons"
 import type React from "react"
+import { twMerge } from "tailwind-merge"
 
 export function Logo({ className, ...props }: React.SVGProps<SVGSVGElement>) {
-  return <IconBrandLaravel className={cn("size-6", className)} {...props} />
+  return <IconBrandIntentui className={twMerge("size-5", className)} {...props} />
 }

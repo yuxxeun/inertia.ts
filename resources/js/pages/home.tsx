@@ -1,41 +1,43 @@
 import { Header } from "@/components/header"
 import { Logo } from "@/components/logo"
 import AppLayout from "@/layouts/app-layout"
-import { IconBrandJustdBlocks } from "@/layouts/app-navbar"
+
 import { Head } from "@inertiajs/react"
 import {
-  IconBrandJustd,
+  IconBrandIntentui,
   IconBrandParsinta,
   IconDuplicateFill,
   IconWindowVisitFill,
-} from "justd-icons"
-import { Card, Container, Link } from "ui"
+} from "@intentui/icons"
+import { Card } from "@/components/ui/card"
+import { Container } from "@/components/ui/container"
+import { Link } from "@/components/ui/link"
 
 const items = [
   {
-    name: "Justd",
-    url: "https://getjustd.com",
-    icon: IconBrandJustd,
+    name: "Intent UI",
+    url: "https://intentui.com",
+    icon: IconBrandIntentui,
     description:
-      " Justd is a chill set of React components, built on top of React Aria Components, all about keeping the web accessible.",
+      " Intent UI is a chill set of React components, built on top of React Aria Components, all about keeping the web accessible.",
   },
   {
     name: "Blocks",
-    url: "https://blocks.getjustd.com",
-    icon: IconBrandJustdBlocks,
+    url: "https://blocks.intentui.com",
+    icon: IconBrandIntentui,
     description:
       "Create stunning, professional-grade layouts that not only save time but also elevate the quality of your projects.",
   },
   {
     name: "Icons",
-    url: "https://getjustd.com/icons",
+    url: "https://intentui.com/icons",
     icon: IconDuplicateFill,
     description:
       "A library of beautifully crafted react icons, perfect for enhancing the visual appeal and user experience of your web applications.",
   },
   {
     name: "Templates",
-    url: "https://blocks.getjustd.com/templates",
+    url: "https://blocks.intentui.com/templates",
     icon: IconWindowVisitFill,
     description: "Explore the next.js templates from web apps to design systems, all here.",
   },
@@ -58,7 +60,7 @@ export default function Home() {
           <div>
             <div className="sm:p-20">
               <Link
-                href="https://getjustd.com"
+                href="https://intentui.com"
                 target="_blank"
                 className="grid size-12 place-content-center rounded-full outline-1 outline-border"
               >

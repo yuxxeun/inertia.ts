@@ -1,14 +1,16 @@
 import GuestLayout from "@/layouts/guest-layout"
 import { Head, useForm } from "@inertiajs/react"
-import { Button, Form, Link } from "ui"
+import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
+import { Link } from "@/components/ui/link"
 
 export default function VerifyEmail({ status }: { status?: any }) {
   const { post, processing } = useForm()
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    post("/email/verification-notification")
+    post(route("verification.send"))
   }
   return (
     <>
@@ -28,7 +30,7 @@ export default function VerifyEmail({ status }: { status?: any }) {
         </Form>
 
         <Link
-          href={"/logout"}
+          href="/logout"
           routerOptions={{
             method: "post",
           }}

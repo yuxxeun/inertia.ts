@@ -1,5 +1,5 @@
 import { usePage } from "@inertiajs/react"
-import { IconBrandIntentui, IconChevronLgDown, IconLogout, IconSettings } from "@intentui/icons"
+import { IconBrandIntentui, IconChevronLgDown, IconLogout } from "@intentui/icons"
 import { useEffect, useState } from "react"
 import { Avatar } from "@/components/ui/avatar"
 import { buttonStyles } from "@/components/ui/button"
@@ -86,14 +86,18 @@ function UserMenu() {
         className="group flex items-start justify-between rounded-lg p-1 text-left data-hovered:bg-secondary"
         aria-label="Open menu"
       >
-        <Avatar src={auth.user.gravatar} shape="square" className="mr-2 size-9 *:size-9" />
-        <div className="flex flex-col pr-2">
+        <Avatar
+          src={auth.user.gravatar}
+          shape="square"
+          className="mr-2 size-7 *:size-7 sm:size-9 sm:*:size-9"
+        />
+        <div className="hidden flex-col pr-2 sm:flex">
           <strong className="font-semibold text-sm">{auth.user.name}</strong>
           <span className="text-xs">{auth.user.email}</span>
         </div>
         <IconChevronLgDown className="transition-transform group-data-pressed:rotate-180" />
       </Menu.Trigger>
-      <Menu.Content placement="bottom end" className="sm:min-w-60">
+      <Menu.Content placement="bottom end" className="sm:min-w-56">
         <Menu.Section>
           <Menu.Header separator className="relative">
             <div>{auth.user.name}</div>
@@ -106,17 +110,13 @@ function UserMenu() {
           <Menu.Label>Dashboard</Menu.Label>
         </Menu.Item>
         <Menu.Item href="/settings/profile" className="justify-between">
-          <Menu.Label>Settings</Menu.Label>
-          <IconSettings />
+          <Menu.Label>Update profile</Menu.Label>
         </Menu.Item>
-        <Menu.Separator />
-        <Menu.Item href="https://intentui.com/button">
-          <Menu.Label>Documenation</Menu.Label>
-          <IconBrandIntentui />
+        <Menu.Item href="/settings/password" className="justify-between">
+          <Menu.Label>Change password</Menu.Label>
         </Menu.Item>
-        <Menu.Item href="https://blocks.intentui.com">
-          <Menu.Label>Premium Blocks</Menu.Label>
-          <IconBrandIntentui />
+        <Menu.Item href="/settings/appearance" className="justify-between">
+          <Menu.Label>Appearance</Menu.Label>
         </Menu.Item>
         <Menu.Separator />
         <Menu.Item routerOptions={{ method: "post" }} href="/logout">

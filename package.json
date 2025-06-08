@@ -30,7 +30,6 @@
     "dependencies": {
         "@intentui/icons": "^1.11.0",
         "@types/node": "^22.14.0",
-        "clsx": "^2.1.1",
         "motion": "^12.10.0",
         "react": "^19.1.0",
         "react-aria-components": "^1.10.0",

@@ -18,7 +18,7 @@ export default function Password() {
     password_confirmation: "",
   })
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
     put(route("password.update"), {
       preserveScroll: true,

@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Form } from "@/components/ui/form"
 import { Link } from "@/components/ui/link"
 import { TextField } from "@/components/ui/text-field"
+import { Loader } from "@/components/ui/loader"
 
 interface LoginProps {
   status: string
@@ -27,7 +28,7 @@ export default function Login(args: LoginProps) {
     }
   }, [])
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
 
     post("/login")
@@ -76,7 +77,8 @@ export default function Login(args: LoginProps) {
             </Link>
           )}
         </div>
-        <Button isDisabled={processing} type="submit">
+        <Button isPending={processing} type="submit">
+          {processing && <Loader />}
           Log in
         </Button>
         <div className="text-center">

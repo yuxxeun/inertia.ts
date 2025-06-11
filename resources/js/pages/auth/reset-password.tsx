@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { TextField } from "@/components/ui/text-field"
 import { Form } from "@/components/ui/form"
+import { Loader } from "@/components/ui/loader"
 
 interface ResetPasswordProps {
   token: string
@@ -25,7 +26,7 @@ export default function ResetPassword(args: ResetPasswordProps) {
     }
   }, [])
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
     post(route("password.request"))
   }
@@ -70,7 +71,8 @@ export default function ResetPassword(args: ResetPasswordProps) {
         />
 
         <div className="mt-4 flex items-center justify-end">
-          <Button type="submit" className="ml-4" isDisabled={processing}>
+          <Button type="submit" className="ml-4" isPending={processing}>
+            {processing && <Loader />}
             Reset Password
           </Button>
         </div>

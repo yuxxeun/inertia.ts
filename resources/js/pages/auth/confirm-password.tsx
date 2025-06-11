@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { TextField } from "@/components/ui/text-field"
+import { Loader } from "@/components/ui/loader"
 
 export default function ConfirmPassword() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -16,7 +17,7 @@ export default function ConfirmPassword() {
     }
   }, [])
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
 
     post("/confirm-password")
@@ -43,7 +44,10 @@ export default function ConfirmPassword() {
         />
 
         <div className="mt-4 flex items-center justify-end">
-          <Button isDisabled={processing}>Confirm</Button>
+          <Button isPending={processing}>
+            {processing && <Loader />}
+            Confirm
+          </Button>
         </div>
       </Form>
     </>

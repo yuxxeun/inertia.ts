@@ -22,7 +22,7 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
     email: auth.user.email ?? "",
   })
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
     patch("/settings/profile", {
       preserveScroll: true,

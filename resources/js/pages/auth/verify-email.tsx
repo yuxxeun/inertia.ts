@@ -3,11 +3,13 @@ import { Head, useForm } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { Link } from "@/components/ui/link"
+import { Loader } from "@/components/ui/loader"
+import type React from "react"
 
 export default function VerifyEmail({ status }: { status?: any }) {
   const { post, processing } = useForm()
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
 
     post(route("verification.send"))
@@ -24,7 +26,8 @@ export default function VerifyEmail({ status }: { status?: any }) {
 
       <div className="mt-4 flex items-center justify-between">
         <Form onSubmit={submit}>
-          <Button isDisabled={processing} type="submit">
+          <Button isPending={processing} type="submit">
+            {processing && <Loader />}
             Resend Verification Email
           </Button>
         </Form>

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { TextField } from "@/components/ui/text-field"
 import { Form } from "@/components/ui/form"
+import { Loader } from "@/components/ui/loader"
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -22,7 +23,7 @@ export default function Register() {
     }
   }, [])
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
 
     post("/register")
@@ -73,7 +74,8 @@ export default function Register() {
           errorMessage={errors.password_confirmation}
           isRequired
         />
-        <Button type="submit" className="w-full" isDisabled={processing}>
+        <Button type="submit" className="w-full" isPending={processing}>
+          {processing && <Loader />}
           Register
         </Button>
         <div className="text-center">

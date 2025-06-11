@@ -3,6 +3,7 @@ import { Head, useForm } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { TextField } from "@/components/ui/text-field"
+import { Loader } from "@/components/ui/loader"
 
 interface ForgotPasswordProps {
   status: string
@@ -13,7 +14,7 @@ export default function ForgotPassword({ status }: ForgotPasswordProps) {
     email: "",
   })
 
-  const submit = (e: { preventDefault: () => void }) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
     post(route("password.email"))
   }
@@ -35,7 +36,8 @@ export default function ForgotPassword({ status }: ForgotPasswordProps) {
         />
 
         <div className="flex items-center justify-end">
-          <Button type="submit" className="w-full" isDisabled={processing}>
+          <Button type="submit" className="w-full" isPending={processing}>
+            {processing && <Loader />}
             Email Password Reset Link
           </Button>
         </div>

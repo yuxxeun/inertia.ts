@@ -94,7 +94,7 @@ export default function Login(args: LoginProps) {
 Login.layout = (page: React.ReactNode) => (
   <GuestLayout
     header="Login"
-    description="Access your account to manage appointments, prescriptions, and more."
+    description="Sign in with your email or continue with a connected account."
     children={page}
   />
 )

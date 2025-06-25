@@ -1,5 +1,4 @@
 import { composeTailwindRenderProps } from "@/lib/primitive"
-import { twJoin } from "tailwind-merge"
 import { Container } from "@/components/ui/container"
 import { ListBox, ListBoxItem, type ListBoxItemProps } from "react-aria-components"
 
@@ -9,7 +8,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
       <Container className="py-6 sm:py-16">
         <div className="flex flex-col items-start gap-6 md:flex-row md:gap-16">
           <div className="w-full shrink-0 md:w-56">
-            <ListBox selectionMode="single">
+            <ListBox aria-label="Menu" selectionMode="single">
               <NavLink href="/settings/profile" isCurrent={route().current("profile.edit")}>
                 Profile
               </NavLink>
@@ -43,14 +42,11 @@ interface NavLinkProps extends ListBoxItemProps {
 export function NavLink({ isCurrent, className, ...props }: NavLinkProps) {
   return (
     <ListBoxItem
-      href="#"
-      className={composeTailwindRenderProps(
-        className,
-        twJoin(
-          "block py-2 text-sm",
-          isCurrent ? "font-semibold text-fg" : "text-muted-fg hover:text-fg",
-        ),
-      )}
+      textValue={props.children as string}
+      className={composeTailwindRenderProps(className, [
+        "block py-2 font-medium text-sm",
+        isCurrent ? "font-semibold text-fg" : "text-muted-fg hover:text-fg",
+      ])}
       {...props}
     />
   )

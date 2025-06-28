@@ -4,35 +4,30 @@ import { ListBox, ListBoxItem, type ListBoxItemProps } from "react-aria-componen
 
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <Container className="py-6 sm:py-16">
-        <div className="flex flex-col items-start gap-6 md:flex-row md:gap-16">
-          <div className="w-full shrink-0 md:w-56">
-            <ListBox aria-label="Menu" selectionMode="single">
-              <NavLink href="/settings/profile" isCurrent={route().current("profile.edit")}>
-                Profile
-              </NavLink>
-              <NavLink href="/settings/password" isCurrent={route().current("password.edit")}>
-                Change password
-              </NavLink>
-              <NavLink
-                href="/settings/appearance"
-                isCurrent={route().current("settings.appearance")}
-              >
-                Appearance
-              </NavLink>
-              <NavLink
-                href="/settings/delete-account"
-                isCurrent={route().current("settings.delete-account")}
-              >
-                Danger zone
-              </NavLink>
-            </ListBox>
-          </div>
-          <div className="w-full min-w-0">{children}</div>
+    <Container className="py-6 sm:py-16">
+      <div className="flex flex-col items-start gap-6 md:flex-row md:gap-16">
+        <div className="w-full shrink-0 md:w-56">
+          <ListBox aria-label="Menu" selectionMode="single">
+            <NavLink href="/settings/profile" isCurrent={route().current("profile.edit")}>
+              Profile
+            </NavLink>
+            <NavLink href="/settings/password" isCurrent={route().current("password.edit")}>
+              Change password
+            </NavLink>
+            <NavLink href="/settings/appearance" isCurrent={route().current("settings.appearance")}>
+              Appearance
+            </NavLink>
+            <NavLink
+              href="/settings/delete-account"
+              isCurrent={route().current("settings.delete-account")}
+            >
+              Danger zone
+            </NavLink>
+          </ListBox>
         </div>
-      </Container>
-    </>
+        <div className="w-full min-w-0">{children}</div>
+      </div>
+    </Container>
   )
 }
 

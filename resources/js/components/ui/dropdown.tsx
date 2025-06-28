@@ -132,7 +132,7 @@ const DropdownKeyboard = ({ className, ...props }: React.ComponentProps<typeof K
     <Keyboard
       classNames={{
         base: twMerge(
-          "absolute right-2 group-hover:text-primary-fg group-focus:text-primary-fg pl-2",
+          "absolute right-2 pl-2 group-hover:text-primary-fg group-focus:text-primary-fg",
           className,
         ),
       }}

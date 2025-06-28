@@ -94,7 +94,7 @@ const navigation = {
 
 export function Footer() {
   return (
-    <footer aria-labelledby="footer-heading">
+    <footer>
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>

@@ -6,8 +6,8 @@
         "dev": "vite",
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
-        "format": "biome format --write resources/js && biome lint --fix resources/js",
-        "lint": "biome lint --fix resources/js",
+        "format": "biome format --write resources && biome lint --fix resources",
+        "lint": "biome lint --fix resources",
         "preview": "tsc && npm run build:ssr && php artisan inertia:start-ssr"
     },
     "devDependencies": {

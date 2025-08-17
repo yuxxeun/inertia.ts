@@ -1,88 +1,72 @@
 import GuestLayout from "@/layouts/guest-layout"
-import { Head, useForm } from "@inertiajs/react"
-import type React from "react"
-import { useEffect } from "react"
+import { Form, Head } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { TextField } from "@/components/ui/text-field"
-import { Form } from "@/components/ui/form"
 import { Loader } from "@/components/ui/loader"
 
 export default function Register() {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-    terms: false,
-  })
-
-  useEffect(() => {
-    return () => {
-      reset("password", "password_confirmation")
-    }
-  }, [])
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    post("/register")
-  }
   return (
     <>
       <Head title="Register" />
 
-      <Form onSubmit={submit} validationErrors={errors} className="flex flex-col gap-y-4">
-        <TextField
-          type="text"
-          name="name"
-          label="Name"
-          value={data.name}
-          autoComplete="name"
-          autoFocus
-          onChange={(v) => setData("name", v)}
-          errorMessage={errors.name}
-          isRequired
-        />
-        <TextField
-          type="email"
-          name="email"
-          label="Email"
-          value={data.email}
-          autoComplete="username"
-          onChange={(v) => setData("email", v)}
-          errorMessage={errors.email}
-          isRequired
-        />
-        <TextField
-          type="password"
-          name="password"
-          label="Password"
-          value={data.password}
-          autoComplete="current-password"
-          onChange={(v) => setData("password", v)}
-          errorMessage={errors.password}
-          isRequired
-        />
+      <Form
+        method="post"
+        action="/register"
+        resetOnSuccess={["password", "password_confirmation"]}
+        disableWhileProcessing
+        className="flex flex-col gap-y-4"
+      >
+        {({ processing, errors }) => (
+          <>
+            <TextField
+              type="text"
+              name="name"
+              label="Name"
+              placeholder="Your name"
+              autoComplete="name"
+              autoFocus
+              errorMessage={errors.name}
+              isRequired
+            />
+            <TextField
+              type="email"
+              name="email"
+              label="Email"
+              placeholder="you@domain.com"
+              autoComplete="username"
+              errorMessage={errors.email}
+              isRequired
+            />
+            <TextField
+              type="password"
+              name="password"
+              label="Password"
+              placeholder="Shhh, it's secret"
+              autoComplete="current-password"
+              errorMessage={errors.password}
+              isRequired
+            />
 
-        <TextField
-          type="password"
-          label="Confirm Password"
-          name="password_confirmation"
-          value={data.password_confirmation}
-          onChange={(v) => setData("password_confirmation", v)}
-          errorMessage={errors.password_confirmation}
-          isRequired
-        />
-        <Button type="submit" className="w-full" isPending={processing}>
-          {processing && <Loader />}
-          Register
-        </Button>
-        <div className="text-center">
-          <Link href="/login" intent="secondary" className="sm:text-sm">
-            Already registered?
-          </Link>
-        </div>
+            <TextField
+              type="password"
+              label="Confirm Password"
+              name="password_confirmation"
+              placeholder="Shhh, it's secret"
+              errorMessage={errors.password_confirmation}
+              isRequired
+            />
+            <Button type="submit" className="w-full" isPending={processing}>
+              {processing && <Loader />}
+              Register
+            </Button>
+            <div className="text-center">
+              <Link href="/login" intent="secondary" className="sm:text-sm">
+                Already registered?
+              </Link>
+            </div>
+          </>
+        )}
       </Form>
     </>
   )

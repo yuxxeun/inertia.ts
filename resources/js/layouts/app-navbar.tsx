@@ -57,7 +57,14 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
         </NavbarSection>
         <NavbarSpacer />
         <NavbarSection className="ml-auto hidden gap-x-2 lg:flex">
-          {auth.user ? <UserMenu /> : <NavbarItem href="/login">Login</NavbarItem>}
+          {auth.user ? (
+            <UserMenu />
+          ) : (
+            <>
+              <NavbarItem href="/login">Login</NavbarItem>
+              <NavbarItem href="/register">Register</NavbarItem>
+            </>
+          )}
         </NavbarSection>
       </Navbar>
       <NavbarMobile>

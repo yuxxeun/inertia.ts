@@ -1,19 +1,10 @@
 import GuestLayout from "@/layouts/guest-layout"
-import { Head, useForm } from "@inertiajs/react"
+import { Head, Form } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
-import { Form } from "@/components/ui/form"
 import { Link } from "@/components/ui/link"
 import { Loader } from "@/components/ui/loader"
-import type React from "react"
 
-export default function VerifyEmail({ status }: { status?: any }) {
-  const { post, processing } = useForm()
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    post(route("verification.send"))
-  }
+export default function VerifyEmail({ status }: { status?: string }) {
   return (
     <>
       <Head title="Email Verification" />
@@ -24,24 +15,30 @@ export default function VerifyEmail({ status }: { status?: any }) {
         </div>
       )}
 
-      <div className="mt-4 flex items-center justify-between">
-        <Form onSubmit={submit}>
-          <Button isPending={processing} type="submit">
-            {processing && <Loader />}
-            Resend Verification Email
-          </Button>
-        </Form>
+      <Form
+        method="post"
+        action={route("verification.send")}
+        className="mt-4 flex items-center justify-between"
+      >
+        {({ processing }) => (
+          <>
+            <Button isPending={processing} type="submit">
+              {processing && <Loader />}
+              Resend Verification Email
+            </Button>
 
-        <Link
-          href="/logout"
-          routerOptions={{
-            method: "post",
-          }}
-          intent="secondary"
-        >
-          Log Out
-        </Link>
-      </div>
+            <Link
+              href="/logout"
+              routerOptions={{
+                method: "post",
+              }}
+              intent="secondary"
+            >
+              Log Out
+            </Link>
+          </>
+        )}
+      </Form>
     </>
   )
 }

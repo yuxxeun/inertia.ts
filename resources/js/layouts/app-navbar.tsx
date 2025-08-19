@@ -1,13 +1,23 @@
 import { usePage } from "@inertiajs/react"
-import { IconBrandIntentui, IconChevronLgDown, IconLogout, IconSettings } from "@intentui/icons"
+import { IconChevronLgDown, IconLogout } from "@intentui/icons"
 import { useEffect, useState } from "react"
 import { Avatar } from "@/components/ui/avatar"
 import { buttonStyles } from "@/components/ui/button"
 import { Menu } from "@/components/ui/menu"
-import { Navbar } from "@/components/ui/navbar"
-import { Separator } from "@/components/ui/separator"
+import {
+  Navbar,
+  NavbarGap,
+  NavbarItem,
+  NavbarMobile,
+  NavbarProvider,
+  NavbarSection,
+  NavbarSpacer,
+  NavbarStart,
+  NavbarTrigger,
+} from "@/components/ui/navbar"
 import { Logo } from "@/components/logo"
 import type { SharedData } from "@/types/shared"
+import { Link } from "@/components/ui/link"
 
 const navigations = [
   {
@@ -23,58 +33,60 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
   const [isOpen, setIsOpen] = useState(false)
   useEffect(() => setIsOpen(false), [page.url])
   return (
-    <Navbar isOpen={isOpen} onOpenChange={setIsOpen} {...props}>
-      <Navbar.Nav>
-        <Navbar.Logo aria-label="Logo">
-          <Logo />
-        </Navbar.Logo>
-        <Navbar.Section>
-          {navigations.map((item) => (
-            <Navbar.Item isCurrent={item.href === page.url} key={item.href} href={item.href}>
-              {item.name}
-            </Navbar.Item>
-          ))}
-          <Navbar.Item target="_blank" href="https://intentui.com" className="justify-between">
-            <Menu.Label>Documentation</Menu.Label>
-          </Navbar.Item>
-          <Navbar.Item target="_blank" href="https://blocks.intentui.com">
-            <IconBrandIntentui />
-            <Menu.Label>Blocks</Menu.Label>
-          </Navbar.Item>
-        </Navbar.Section>
-
-        <Navbar.Section className="ml-auto hidden gap-x-2 lg:flex">
-          {auth.user ? <UserMenu /> : <Navbar.Item href="/login">Login</Navbar.Item>}
-        </Navbar.Section>
-      </Navbar.Nav>
-
-      <Navbar.Compact>
-        <Navbar.Flex>
-          <Navbar.Trigger />
-          <Separator className="h-6" orientation="vertical" />
-          <Navbar.Logo aria-label="Logo">
+    <NavbarProvider isOpen={isOpen} onOpenChange={setIsOpen}>
+      <Navbar {...props}>
+        <NavbarStart>
+          <Link href="/" aria-label="Logo">
             <Logo />
-          </Navbar.Logo>
-        </Navbar.Flex>
-        <Navbar.Flex className="gap-x-1">
+          </Link>
+        </NavbarStart>
+        <NavbarGap />
+
+        <NavbarSection>
+          {navigations.map((item) => (
+            <NavbarItem isCurrent={item.href === page.url} key={item.href} href={item.href}>
+              {item.name}
+            </NavbarItem>
+          ))}
+          <NavbarItem target="_blank" href="https://intentui.com" className="justify-between">
+            Documentation
+          </NavbarItem>
+          <NavbarItem target="_blank" href="https://blocks.intentui.com">
+            Blocks
+          </NavbarItem>
+        </NavbarSection>
+        <NavbarSpacer />
+        <NavbarSection className="ml-auto hidden gap-x-2 lg:flex">
           {auth.user ? (
             <UserMenu />
           ) : (
-            <Navbar.Item
+            <>
+              <NavbarItem href="/login">Login</NavbarItem>
+              <NavbarItem href="/register">Register</NavbarItem>
+            </>
+          )}
+        </NavbarSection>
+      </Navbar>
+      <NavbarMobile>
+        <NavbarTrigger />
+        <NavbarSpacer />
+        <NavbarSection>
+          {auth.user ? (
+            <UserMenu />
+          ) : (
+            <NavbarItem
               className={buttonStyles({
                 intent: "outline",
-                size: "small",
+                size: "sm",
               })}
               href="/login"
             >
               Login
-            </Navbar.Item>
+            </NavbarItem>
           )}
-        </Navbar.Flex>
-      </Navbar.Compact>
-
-      {children}
-    </Navbar>
+        </NavbarSection>
+      </NavbarMobile>
+    </NavbarProvider>
   )
 }
 
@@ -86,14 +98,18 @@ function UserMenu() {
         className="group flex items-start justify-between rounded-lg p-1 text-left data-hovered:bg-secondary"
         aria-label="Open menu"
       >
-        <Avatar src={auth.user.gravatar} shape="square" className="mr-2 size-9 *:size-9" />
-        <div className="flex flex-col pr-2">
+        <Avatar
+          src={auth.user.gravatar}
+          shape="square"
+          className="mr-2 size-7 *:size-7 sm:size-9 sm:*:size-9"
+        />
+        <div className="hidden flex-col pr-2 sm:flex">
           <strong className="font-semibold text-sm">{auth.user.name}</strong>
           <span className="text-xs">{auth.user.email}</span>
         </div>
         <IconChevronLgDown className="transition-transform group-data-pressed:rotate-180" />
       </Menu.Trigger>
-      <Menu.Content placement="bottom end" className="sm:min-w-60">
+      <Menu.Content placement="bottom end" className="sm:min-w-56">
         <Menu.Section>
           <Menu.Header separator className="relative">
             <div>{auth.user.name}</div>
@@ -106,17 +122,13 @@ function UserMenu() {
           <Menu.Label>Dashboard</Menu.Label>
         </Menu.Item>
         <Menu.Item href="/settings/profile" className="justify-between">
-          <Menu.Label>Settings</Menu.Label>
-          <IconSettings />
+          <Menu.Label>Update profile</Menu.Label>
         </Menu.Item>
-        <Menu.Separator />
-        <Menu.Item href="https://intentui.com/button">
-          <Menu.Label>Documenation</Menu.Label>
-          <IconBrandIntentui />
+        <Menu.Item href="/settings/password" className="justify-between">
+          <Menu.Label>Change password</Menu.Label>
         </Menu.Item>
-        <Menu.Item href="https://blocks.intentui.com">
-          <Menu.Label>Premium Blocks</Menu.Label>
-          <IconBrandIntentui />
+        <Menu.Item href="/settings/appearance" className="justify-between">
+          <Menu.Label>Appearance</Menu.Label>
         </Menu.Item>
         <Menu.Separator />
         <Menu.Item routerOptions={{ method: "post" }} href="/logout">

@@ -55,7 +55,7 @@ test('user can delete their account', function () {
 
     $response = $this
         ->actingAs($user)
-        ->delete('/settings/profile', [
+        ->delete('/settings/delete-account', [
             'password' => 'password',
         ]);
 
@@ -72,14 +72,14 @@ test('correct password must be provided to delete account', function () {
 
     $response = $this
         ->actingAs($user)
-        ->from('/settings/profile')
-        ->delete('/settings/profile', [
+        ->from('/settings/delete-account')
+        ->delete('/settings/delete-account', [
             'password' => 'wrong-password',
         ]);
 
     $response
         ->assertSessionHasErrors('password')
-        ->assertRedirect('/settings/profile');
+        ->assertRedirect('/settings/delete-account');
 
     expect($user->fresh())->not->toBeNull();
 });

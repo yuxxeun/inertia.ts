@@ -51,7 +51,7 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           <NavbarItem target="_blank" href="https://intentui.com" className="justify-between">
             Documentation
           </NavbarItem>
-          <NavbarItem target="_blank" href="https://blocks.intentui.com">
+          <NavbarItem target="_blank" href="https://irsyad.co/blocks">
             Blocks
           </NavbarItem>
         </NavbarSection>

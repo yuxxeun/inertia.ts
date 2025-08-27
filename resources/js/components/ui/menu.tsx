@@ -1,15 +1,3 @@
-"use client"
-
-import {
-  DropdownDescription,
-  DropdownKeyboard,
-  DropdownLabel,
-  DropdownSeparator,
-  dropdownItemStyles,
-  dropdownSectionStyles,
-} from "@/components/ui/dropdown"
-import { PopoverContent, type PopoverContentProps } from "@/components/ui/popover"
-import { composeTailwindRenderProps } from "@/lib/primitive"
 import { IconBulletFill, IconCheck, IconChevronLgRight } from "@intentui/icons"
 import type {
   ButtonProps,
@@ -21,20 +9,30 @@ import type {
 import {
   Button,
   Collection,
+  composeRenderProps,
   Header,
   MenuItem as MenuItemPrimitive,
   Menu as MenuPrimitive,
   MenuSection as MenuSectionPrimitive,
   MenuTrigger as MenuTriggerPrimitive,
   SubmenuTrigger as SubmenuTriggerPrimitive,
-  composeRenderProps,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
 import type { VariantProps } from "tailwind-variants"
+import { composeTailwindRenderProps } from "@/lib/primitive"
+import {
+  DropdownDescription,
+  DropdownKeyboard,
+  DropdownLabel,
+  DropdownSeparator,
+  dropdownItemStyles,
+  dropdownSectionStyles,
+} from "./dropdown"
+import { PopoverContent, type PopoverContentProps } from "./popover"
 
 const Menu = (props: MenuTriggerPrimitiveProps) => <MenuTriggerPrimitive {...props} />
 
-const MenuSubMenu = ({ delay = 0, ...props }) => (
+const MenuSubmenu = ({ delay = 0, ...props }) => (
   <SubmenuTriggerPrimitive {...props} delay={delay}>
     {props.children}
   </SubmenuTriggerPrimitive>
@@ -73,7 +71,6 @@ interface MenuContentProps<T>
     | "onOpenChange"
     | "shouldFlip"
   >
-  showArrow?: boolean
 }
 
 const MenuContent = <T extends object>({
@@ -84,10 +81,7 @@ const MenuContent = <T extends object>({
 }: MenuContentProps<T>) => {
   return (
     <PopoverContent
-      className={composeTailwindRenderProps(
-        popover?.className,
-        "min-w-40 p-0 shadow-xs outline-hidden",
-      )}
+      className={composeTailwindRenderProps(popover?.className, "min-w-40")}
       placement={placement}
       {...popover}
     >
@@ -95,7 +89,7 @@ const MenuContent = <T extends object>({
         data-slot="menu-content"
         className={composeTailwindRenderProps(
           className,
-          "grid max-h-[calc(var(--visual-viewport-height)-10rem)] grid-cols-[auto_1fr] overflow-auto rounded-xl p-1 outline-hidden [clip-path:inset(0_0_0_0_round_calc(var(--radius-lg)-2px))] sm:max-h-[inherit] *:[[role='group']+[role=group]]:mt-4 *:[[role='group']+[role=separator]]:mt-1",
+          "grid max-h-[inherit] grid-cols-[auto_1fr] overflow-y-auto overscroll-contain p-1 outline-hidden [clip-path:inset(0_0_0_0_round_calc(var(--radius-lg)-2px))] *:[[role='group']+[role=group]]:mt-4 *:[[role='group']+[role=separator]]:mt-1",
         )}
         {...props}
       />
@@ -114,6 +108,7 @@ const MenuItem = ({ className, isDanger = false, children, ...props }: MenuItemP
       className={composeRenderProps(className, (className, { hasSubmenu, ...renderProps }) =>
         dropdownItemStyles({
           ...renderProps,
+          isDanger: isDanger,
           className: hasSubmenu
             ? twMerge(
                 "open:data-danger:bg-danger/10 open:data-danger:text-danger",
@@ -124,7 +119,6 @@ const MenuItem = ({ className, isDanger = false, children, ...props }: MenuItemP
         }),
       )}
       textValue={textValue}
-      data-danger={isDanger ? "true" : undefined}
       {...props}
     >
       {(values) => (
@@ -140,7 +134,7 @@ const MenuItem = ({ className, isDanger = false, children, ...props }: MenuItemP
                 </span>
               )}
               {values.selectionMode === "multiple" && (
-                <IconCheck className="-mx-0.5 mr-2 size-4" data-slot="checked-icon" />
+                <IconCheck className="-mx-0.5 mr-2 size-4" data-slot="check-indicator" />
               )}
             </>
           )}
@@ -201,7 +195,19 @@ Menu.Separator = MenuSeparator
 Menu.Label = MenuLabel
 Menu.Description = MenuDescription
 Menu.Trigger = MenuTrigger
-Menu.Submenu = MenuSubMenu
+Menu.Submenu = MenuSubmenu
 
 export type { MenuContentProps, MenuTriggerProps, MenuItemProps, MenuSectionProps }
-export { Menu }
+export {
+  Menu,
+  MenuKeyboard,
+  MenuContent,
+  MenuHeader,
+  MenuItem,
+  MenuSection,
+  MenuSeparator,
+  MenuLabel,
+  MenuDescription,
+  MenuTrigger,
+  MenuSubmenu,
+}

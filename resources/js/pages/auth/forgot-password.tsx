@@ -3,6 +3,7 @@ import { Head, Form } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
+import PasswordResetLinkController from "@/actions/App/Http/Controllers/Auth/PasswordResetLinkController"
 
 interface ForgotPasswordProps {
   status: string
@@ -14,7 +15,7 @@ export default function ForgotPassword({ status }: ForgotPasswordProps) {
       <Head title="Forgot Password" />
       {status && <div className="font-medium text-sm text-success">{status}</div>}
 
-      <Form className="mt-4 space-y-4" action={route("password.email")} method="post">
+      <Form className="mt-4 space-y-4" {...PasswordResetLinkController.store.form()}>
         {({ processing, errors }) => (
           <>
             <TextField type="text" name="email" isRequired errorMessage={errors.email} autoFocus />

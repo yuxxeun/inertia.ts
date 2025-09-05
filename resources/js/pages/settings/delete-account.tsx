@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/pages/settings/settings-layout"
 import { Modal } from "@/components/ui/modal"
+import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController"
+import DeleteAccountController from "@/actions/App/Http/Controllers/Settings/DeleteAccountController"
 const title = "Delete Account"
 export default function DeleteAccount() {
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
@@ -21,7 +23,7 @@ export default function DeleteAccount() {
   })
 
   const deleteUser = () => {
-    destroy(route("settings.delete-account"), {
+    destroy(DeleteAccountController.destroy().url, {
       preserveScroll: true,
       onSuccess: () => closeModal(),
       onFinish: () => reset(),

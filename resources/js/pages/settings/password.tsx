@@ -6,6 +6,7 @@ import { TextField } from "@/components/ui/text-field"
 import { Button } from "@/components/ui/button"
 import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/pages/settings/settings-layout"
+import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController"
 
 const title = "Change Password"
 
@@ -20,7 +21,7 @@ export default function Password() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    put(route("password.update"), {
+    put(PasswordController.update().url, {
       preserveScroll: true,
       onSuccess: () => {
         reset()

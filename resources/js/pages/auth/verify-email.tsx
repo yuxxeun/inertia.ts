@@ -3,6 +3,7 @@ import { Head, Form } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { Loader } from "@/components/ui/loader"
+import EmailVerificationNotificationController from "@/actions/App/Http/Controllers/Auth/EmailVerificationNotificationController"
 
 export default function VerifyEmail({ status }: { status?: string }) {
   return (
@@ -16,8 +17,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
       )}
 
       <Form
-        method="post"
-        action={route("verification.send")}
+        {...EmailVerificationNotificationController.store.form()}
         className="mt-4 flex items-center justify-between"
       >
         {({ processing }) => (

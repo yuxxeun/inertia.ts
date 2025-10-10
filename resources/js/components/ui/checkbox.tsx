@@ -1,5 +1,3 @@
-"use client"
-
 import { IconCheck, IconMinus } from "@intentui/icons"
 import type {
   CheckboxGroupProps as CheckboxGroupPrimitiveProps,
@@ -10,10 +8,9 @@ import {
   Checkbox as CheckboxPrimitive,
   composeRenderProps,
 } from "react-aria-components"
-
-import { Description, FieldError, type FieldProps, Label } from "@/components/ui/field"
-import { composeTailwindRenderProps } from "@/lib/primitive"
 import { twMerge } from "tailwind-merge"
+import { composeTailwindRenderProps } from "@/lib/primitive"
+import { Description, FieldError, type FieldProps, Label } from "./field"
 
 interface CheckboxGroupProps extends CheckboxGroupPrimitiveProps, Omit<FieldProps, "placeholder"> {}
 
@@ -74,11 +71,13 @@ const Checkbox = ({ className, children, description, label, ...props }: Checkbo
           return (
             <div
               className={twMerge(
-                "grid grid-cols-[1.125rem_1fr] gap-x-3 gap-y-1 sm:grid-cols-[1rem_1fr]",
-                "*:data-[slot=indicator]:col-start-1 *:data-[slot=indicator]:row-start-1 *:data-[slot=indicator]:mt-0.75 sm:*:data-[slot=indicator]:mt-1",
+                "grid grid-cols-[1.125rem_1fr] sm:grid-cols-[1rem_1fr]",
+                "*:data-[slot=indicator]:col-start-1 *:data-[slot=indicator]:row-start-1",
                 "*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1",
                 "*:[[slot=description]]:col-start-2 *:[[slot=description]]:row-start-2",
                 "has-[[slot=description]]:**:data-[slot=label]:font-medium",
+                props.slot !== "selection" &&
+                  "gap-x-3 gap-y-1 *:data-[slot=indicator]:mt-0.75 sm:*:data-[slot=indicator]:mt-1",
               )}
             >
               <span
@@ -89,7 +88,7 @@ const Checkbox = ({ className, children, description, label, ...props }: Checkbo
                   "size-4.5 *:data-[slot=check-indicator]:size-4",
                   (isSelected || isIndeterminate) && [
                     "bg-primary text-primary-fg dark:inset-ring-primary",
-                    "group-invalid:inset-ring-danger/70 group-invalid:bg-danger group-invalid:text-danger-fg",
+                    "group-invalid:inset-ring-danger/70 group-invalid:bg-danger group-invalid:text-danger-fg dark:group-invalid:inset-ring-danger/70",
                   ],
                   isFocusVisible && [
                     "inset-ring-primary ring-3 ring-ring/20",

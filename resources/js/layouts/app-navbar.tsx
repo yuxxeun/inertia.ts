@@ -36,7 +36,7 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
     <NavbarProvider isOpen={isOpen} onOpenChange={setIsOpen}>
       <Navbar {...props}>
         <NavbarStart>
-          <Link href="/" aria-label="Logo">
+          <Link href="/" aria-label="Goto homepage">
             <Logo />
           </Link>
         </NavbarStart>

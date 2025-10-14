@@ -51,7 +51,7 @@ export function AppNavbar({ children, ...props }: React.ComponentProps<typeof Na
           <NavbarItem target="_blank" href="https://intentui.com" className="justify-between">
             Documentation
           </NavbarItem>
-          <NavbarItem target="_blank" href="https://irsyad.co/blocks">
+          <NavbarItem target="_blank" href="https://design.intentui.com">
             Blocks
           </NavbarItem>
         </NavbarSection>
@@ -100,7 +100,7 @@ function UserMenu() {
       >
         <Avatar
           src={auth.user.gravatar}
-          shape="square"
+          isSquare
           className="mr-2 size-7 *:size-7 sm:size-9 sm:*:size-9"
         />
         <div className="hidden flex-col pr-2 sm:flex">

@@ -3,6 +3,8 @@ import { Head, Form } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
+import { FieldError, Label } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 
 export default function ConfirmPassword() {
   return (
@@ -16,14 +18,11 @@ export default function ConfirmPassword() {
       <Form method="post" action={route("password.confirm")} resetOnSuccess={["password"]}>
         {({ processing, errors }) => (
           <>
-            <TextField
-              id="password"
-              label="Password"
-              type="password"
-              name="password"
-              errorMessage={errors.password}
-              autoFocus
-            />
+            <TextField name="password" autoComplete="current-password">
+              <Label>Password</Label>
+              <Input type="password" />
+              <FieldError>{errors.password}</FieldError>
+            </TextField>
 
             <div className="mt-4 flex items-center justify-end">
               <Button isPending={processing}>

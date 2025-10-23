@@ -2,6 +2,8 @@ import type { SVGProps } from "react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { TextField } from "@/components/ui/text-field"
+import { Input } from "@/components/ui/input"
+import { FieldError } from "@/components/ui/field"
 
 const navigation = {
   solutions: [
@@ -178,13 +180,13 @@ export function Footer() {
                 <TextField
                   className="w-full"
                   aria-label="Email address"
-                  type="email"
                   name="email-address"
-                  id="email-address"
                   autoComplete="email"
                   isRequired
-                  placeholder="Enter your email"
-                />
+                >
+                  <Input type="email" placeholder="Enter your email" />
+                  <FieldError />
+                </TextField>
                 <div className="mt-6 sm:mt-0 sm:ml-2 sm:flex-shrink-0">
                   <Button type="submit">Subscribe</Button>
                 </div>

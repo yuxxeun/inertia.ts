@@ -1,12 +1,14 @@
 import AppLayout from "@/layouts/app-layout"
 import { Head, useForm, usePage } from "@inertiajs/react"
 import type { SharedData } from "@/types/shared"
-import { Card } from "@/components/ui/card"
-import { Form } from "@/components/ui/form"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Form } from "react-aria-components"
 import { TextField } from "@/components/ui/text-field"
 import { Link } from "@/components/ui/link"
 import { Button } from "@/components/ui/button"
 import SettingsLayout from "@/pages/settings/settings-layout"
+import { FieldError, Label } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 
 interface Props {
   mustVerifyEmail: boolean
@@ -34,43 +36,41 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
       <Head title={title} />
       <h1 className="sr-only">{title}</h1>
       <Card>
-        <Card.Header>
-          <Card.Title>Profile Information</Card.Title>
-          <Card.Description>
+        <CardHeader>
+          <CardTitle>Profile Information</CardTitle>
+          <CardDescription>
             Update your account's profile information and email address.
-          </Card.Description>
-        </Card.Header>
-        <Card.Content>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
           <Form validationErrors={errors} onSubmit={submit} className="max-w-lg space-y-6">
             <TextField
-              id="name"
-              label="Name"
-              type="text"
               value={data.name}
               onChange={(v) => setData("name", v)}
-              isRequired
-              errorMessage={errors.name}
               autoFocus
               autoComplete="name"
-            />
+            >
+              <Label>Name</Label>
+              <Input />
+              <FieldError>{errors.name}</FieldError>
+            </TextField>
             <TextField
-              id="email"
-              type="email"
-              label="Email"
               value={data.email}
               onChange={(v) => setData("email", v)}
-              isRequired
-              errorMessage={errors.email}
               autoComplete="email"
-            />
+            >
+              <Label>Email</Label>
+              <Input type="email" />
+              <FieldError>{errors.email}</FieldError>
+            </TextField>
 
             {mustVerifyEmail && auth.user.email_verified_at === null && (
               <div>
-                <p className="mt-2 text-sm">
+                <p className="mt-2 text-base/6 sm:text-sm/6">
                   Your email address is unverified.
                   <Link
                     href="/email/verification-notification"
-                    intent="secondary"
+                    className="text-primary-subtle-fg hover:underline"
                     routerOptions={{
                       method: "post",
                     }}
@@ -80,7 +80,7 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
                 </p>
 
                 {status === "verification-link-sent" && (
-                  <div className="mt-2 font-medium text-green-600 text-sm">
+                  <div className="mt-2 font-medium text-base/6 text-success-subtle-fg hover:underline sm:text-sm/6">
                     A new verification link has been sent to your email address.
                   </div>
                 )}
@@ -94,7 +94,7 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
               {recentlySuccessful && <p className="text-muted-fg text-sm">Saved.</p>}
             </div>
           </Form>
-        </Card.Content>
+        </CardContent>
       </Card>
     </>
   )

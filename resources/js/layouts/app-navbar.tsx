@@ -1,9 +1,16 @@
 import { usePage } from "@inertiajs/react"
-import { IconChevronLgDown, IconLogout } from "@intentui/icons"
 import { useEffect, useState } from "react"
 import { Avatar } from "@/components/ui/avatar"
-import { buttonStyles } from "@/components/ui/button"
-import { Menu } from "@/components/ui/menu"
+import { Button, buttonStyles } from "@/components/ui/button"
+import {
+  Menu,
+  MenuContent,
+  MenuHeader,
+  MenuItem,
+  MenuSection,
+  MenuSeparator,
+  MenuLabel,
+} from "@/components/ui/menu"
 import {
   Navbar,
   NavbarGap,
@@ -18,6 +25,7 @@ import {
 import { Logo } from "@/components/logo"
 import type { SharedData } from "@/types/shared"
 import { Link } from "@/components/ui/link"
+import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline"
 
 const navigations = [
   {
@@ -94,48 +102,36 @@ function UserMenu() {
   const { auth } = usePage<SharedData>().props
   return (
     <Menu>
-      <Menu.Trigger
-        className="group flex items-start justify-between rounded-lg p-1 text-left data-hovered:bg-secondary"
-        aria-label="Open menu"
-      >
-        <Avatar
-          src={auth.user.gravatar}
-          isSquare
-          className="mr-2 size-7 *:size-7 sm:size-9 sm:*:size-9"
-        />
-        <div className="hidden flex-col pr-2 sm:flex">
-          <strong className="font-semibold text-sm">{auth.user.name}</strong>
-          <span className="text-xs">{auth.user.email}</span>
-        </div>
-        <IconChevronLgDown className="transition-transform group-data-pressed:rotate-180" />
-      </Menu.Trigger>
-      <Menu.Content placement="bottom end" className="sm:min-w-56">
-        <Menu.Section>
-          <Menu.Header separator className="relative">
+      <Button size="sq-md" intent="plain" isCircle aria-label="Open menu">
+        <Avatar src={auth.user.gravatar} size="sm" />
+      </Button>
+      <MenuContent placement="bottom end" className="sm:min-w-56">
+        <MenuSection>
+          <MenuHeader separator className="relative">
             <div>{auth.user.name}</div>
             <div className="truncate whitespace-nowrap pr-6 font-normal text-muted-fg text-sm">
               {auth.user.email}
             </div>
-          </Menu.Header>
-        </Menu.Section>
-        <Menu.Item href="/dashboard">
-          <Menu.Label>Dashboard</Menu.Label>
-        </Menu.Item>
-        <Menu.Item href="/settings/profile" className="justify-between">
-          <Menu.Label>Update profile</Menu.Label>
-        </Menu.Item>
-        <Menu.Item href="/settings/password" className="justify-between">
-          <Menu.Label>Change password</Menu.Label>
-        </Menu.Item>
-        <Menu.Item href="/settings/appearance" className="justify-between">
-          <Menu.Label>Appearance</Menu.Label>
-        </Menu.Item>
-        <Menu.Separator />
-        <Menu.Item routerOptions={{ method: "post" }} href="/logout">
-          <Menu.Label>Logout</Menu.Label>
-          <IconLogout />
-        </Menu.Item>
-      </Menu.Content>
+          </MenuHeader>
+        </MenuSection>
+        <MenuItem href="/dashboard">
+          <MenuLabel>Dashboard</MenuLabel>
+        </MenuItem>
+        <MenuItem href="/settings/profile" className="justify-between">
+          <MenuLabel>Update profile</MenuLabel>
+        </MenuItem>
+        <MenuItem href="/settings/password" className="justify-between">
+          <MenuLabel>Change password</MenuLabel>
+        </MenuItem>
+        <MenuItem href="/settings/appearance" className="justify-between">
+          <MenuLabel>Appearance</MenuLabel>
+        </MenuItem>
+        <MenuSeparator />
+        <MenuItem routerOptions={{ method: "post" }} href="/logout">
+          <MenuLabel>Logout</MenuLabel>
+          <ArrowRightEndOnRectangleIcon />
+        </MenuItem>
+      </MenuContent>
     </Menu>
   )
 }

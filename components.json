@@ -17,8 +17,5 @@
             "lib": "@/lib",
             "hooks": "@/hooks"
         },
-        "iconLibrary": "@intentui/icons",
-        "registries": {
-            "@intentui": "https://intentui.com/r/{name}"
-        }
+        "iconLibrary": "@heroicons/react"
     }

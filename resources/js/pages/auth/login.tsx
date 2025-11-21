@@ -6,6 +6,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Link } from "@/components/ui/link"
 import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
+import { FieldError, Label } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 
 interface LoginProps {
   status: string
@@ -14,33 +16,11 @@ interface LoginProps {
 
 export default function Login(args: LoginProps) {
   const { status, canResetPassword } = args
-  // const { data, setData, post, processing, errors, reset } = useForm({
-  //   email: "",
-  //   password: "",
-  //   remember: "",
-  // })
-  //
-  // useEffect(() => {
-  //   return () => {
-  //     reset("password")
-  //   }
-  // }, [])
-  //
-  // const submit = (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //
-  //   post("/login")
-  // }
-
   return (
     <>
       <Head title="Log in" />
 
-      {status && (
-        <div className="mb-4 font-medium text-emerald-600 text-sm dark:text-emerald-400">
-          {status}
-        </div>
-      )}
+      {status && <div className="mb-4 font-medium text-success-subtle-fg">{status}</div>}
 
       <Form
         method="post"
@@ -50,27 +30,23 @@ export default function Login(args: LoginProps) {
       >
         {({ processing, errors }) => (
           <>
-            <TextField
-              label="Email"
-              type="email"
-              name="email"
-              autoComplete="username"
-              autoFocus
-              errorMessage={errors.email}
-              isRequired
-            />
-            <TextField
-              type="password"
-              name="password"
-              label="Password"
-              errorMessage={errors.password}
-              autoComplete="current-password"
-              isRequired
-            />
+            <TextField name="email" autoComplete="username" autoFocus>
+              <Label>Email</Label>
+              <Input type="email" />
+              <FieldError>{errors.email}</FieldError>
+            </TextField>
+            <TextField name="password" autoComplete="current-password">
+              <Label>Password</Label>
+              <Input type="password" />
+              <FieldError>{errors.password}</FieldError>
+            </TextField>
             <div className="flex items-center justify-between">
               <Checkbox name="remember">Remember me</Checkbox>
               {canResetPassword && (
-                <Link href="/forgot-password" className="sm:text-sm" intent="secondary">
+                <Link
+                  href="/forgot-password"
+                  className="text-base/6 text-primary-subtle-fg hover:underline sm:text-sm/6"
+                >
                   Forgot your password?
                 </Link>
               )}
@@ -80,7 +56,10 @@ export default function Login(args: LoginProps) {
               Log in
             </Button>
             <div className="text-center">
-              <Link href="/register" className="sm:text-sm" intent="secondary">
+              <Link
+                href="/register"
+                className="text-base/6 text-primary-subtle-fg hover:underline sm:text-sm/6"
+              >
                 Dont have account? Register
               </Link>
             </div>

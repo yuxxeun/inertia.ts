@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
+import { FieldError, Label } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import type React from "react"
 
 export default function Register() {
   return (
@@ -19,49 +22,37 @@ export default function Register() {
       >
         {({ processing, errors }) => (
           <>
-            <TextField
-              type="text"
-              name="name"
-              label="Name"
-              placeholder="Your name"
-              autoComplete="name"
-              autoFocus
-              errorMessage={errors.name}
-              isRequired
-            />
-            <TextField
-              type="email"
-              name="email"
-              label="Email"
-              placeholder="you@domain.com"
-              autoComplete="username"
-              errorMessage={errors.email}
-              isRequired
-            />
-            <TextField
-              type="password"
-              name="password"
-              label="Password"
-              placeholder="Shhh, it's secret"
-              autoComplete="current-password"
-              errorMessage={errors.password}
-              isRequired
-            />
+            <TextField name="name" autoComplete="name" autoFocus>
+              <Label>Name</Label>
+              <Input type="text" placeholder="Your name" />
+              <FieldError>{errors.name}</FieldError>
+            </TextField>
 
-            <TextField
-              type="password"
-              label="Confirm Password"
-              name="password_confirmation"
-              placeholder="Shhh, it's secret"
-              errorMessage={errors.password_confirmation}
-              isRequired
-            />
+            <TextField name="email" autoComplete="username">
+              <Label>Email</Label>
+              <Input type="email" placeholder="you@domain.com" />
+              <FieldError>{errors.email}</FieldError>
+            </TextField>
+            <TextField name="password" autoComplete="current-password">
+              <Label>Password</Label>
+              <Input type="password" placeholder="Shhh, it's secret" />
+              <FieldError>{errors.password}</FieldError>
+            </TextField>
+
+            <TextField name="password_confirmation">
+              <Label>Confirm passwor</Label>
+              <Input type="password" placeholder="Shhh, it's secret" />
+              <FieldError>{errors.password_confirmation}</FieldError>
+            </TextField>
             <Button type="submit" className="w-full" isPending={processing}>
               {processing && <Loader />}
               Register
             </Button>
             <div className="text-center">
-              <Link href="/login" intent="secondary" className="sm:text-sm">
+              <Link
+                href="/login"
+                className="text-base/6 text-primary-subtle-fg hover:underline sm:text-sm/6"
+              >
                 Already registered?
               </Link>
             </div>

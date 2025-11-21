@@ -28,7 +28,7 @@
         "vite-plugin-run": "^0.6.1"
     },
     "dependencies": {
-        "@intentui/icons": "^1.11.0",
+        "@heroicons/react": "^2.2.0",
         "@types/node": "^22.15.34",
         "motion": "^12.19.2",
         "react": "^19.1.0",

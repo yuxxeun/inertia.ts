@@ -1,6 +1,6 @@
 import { Flash } from "@/components/flash"
 import { Logo } from "@/components/logo"
-import { Card } from "@/components/ui/card"
+import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import type { PropsWithChildren, ReactNode } from "react"
 import { Link } from "@/components/ui/link"
 
@@ -22,11 +22,11 @@ export default function GuestLayout({
       </Link>
 
       <div className="mt-6 w-full max-w-sm">
-        <Card.Header className="text-center">
-          <Card.Title>{header}</Card.Title>
-          <Card.Description>{description}</Card.Description>
-        </Card.Header>
-        <Card.Content>{children}</Card.Content>
+        <CardHeader className="text-center">
+          <CardTitle>{header}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+        <CardContent>{children}</CardContent>
       </div>
     </div>
   )

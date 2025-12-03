@@ -40,7 +40,7 @@ export default function Register() {
             </TextField>
 
             <TextField name="password_confirmation">
-              <Label>Confirm passwor</Label>
+              <Label>Confirm password</Label>
               <Input type="password" placeholder="Shhh, it's secret" />
               <FieldError>{errors.password_confirmation}</FieldError>
             </TextField>

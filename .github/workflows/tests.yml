@@ -27,14 +27,21 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: '22'
-          cache: 'npm'
+          bun-version: '1.1.30'
 
-      - name: Install Node Dependencies
-        run: npm ci
+      - name: Cache Bun Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/bun
+          key: bun-cache-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            bun-cache-
+
+      - name: Install Frontend Dependencies
+        run: bun install --frozen-lockfile
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -43,7 +50,7 @@ jobs:
         run: php artisan ziggy:generate
 
       - name: Build Assets
-        run: npm run build
+        run: bun run build
 
       - name: Copy Environment File
         run: cp .env.example .env

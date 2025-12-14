@@ -1,5 +1,3 @@
-"use client"
-
 import type { DialogProps, DialogTriggerProps, ModalOverlayProps } from "react-aria-components"
 import {
   DialogTrigger as DialogTriggerPrimitive,
@@ -39,12 +37,11 @@ const sizes = {
 }
 
 interface ModalContentProps
-  extends Omit<ModalOverlayProps, "className" | "children">,
+  extends Omit<ModalOverlayProps, "children">,
     Pick<DialogProps, "aria-label" | "aria-labelledby" | "role" | "children"> {
   size?: keyof typeof sizes
   closeButton?: boolean
   isBlurred?: boolean
-  className?: ModalOverlayProps["className"]
   overlay?: Omit<ModalOverlayProps, "children">
 }
 
@@ -81,12 +78,11 @@ const ModalContent = ({
           "row-start-2 w-full text-left align-middle",
           "[--visual-viewport-vertical-padding:16px]",
           size === "fullscreen"
-            ? "sm:rounded-md sm:[--visual-viewport-vertical-padding:16px]"
+            ? "**:data-[slot=dialog-body]:min-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding)-var(--dialog-header-height,0px)-var(--dialog-footer-height,0px))] sm:rounded-md sm:[--visual-viewport-vertical-padding:16px]"
             : "sm:rounded-xl sm:[--visual-viewport-vertical-padding:32px]",
           "relative overflow-hidden bg-overlay text-overlay-fg",
           "rounded-t-2xl shadow-lg ring ring-fg/5 dark:ring-border",
           sizes[size],
-
           "entering:slide-in-from-bottom sm:entering:zoom-in-95 sm:entering:slide-in-from-bottom-0 entering:animate-in entering:duration-300 entering:ease-out",
           "exiting:slide-out-to-bottom sm:exiting:zoom-out-95 sm:exiting:slide-out-to-bottom-0 exiting:animate-out exiting:ease-in",
           className,

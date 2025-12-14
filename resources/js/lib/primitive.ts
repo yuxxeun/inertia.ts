@@ -3,6 +3,7 @@
 import { composeRenderProps } from "react-aria-components"
 import { type ClassNameValue, twMerge } from "tailwind-merge"
 
+/** @deprecated Use cx */
 export function composeTailwindRenderProps<T>(
   className: string | ((v: T) => string) | undefined,
   tailwind: ClassNameValue,

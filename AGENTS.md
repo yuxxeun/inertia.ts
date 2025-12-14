@@ -36,7 +36,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Do not change the application's dependencies without approval.
 
 ## Frontend Bundling
-- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `npm run build`, `npm run dev`, or `composer run dev`. Ask them.
+- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `bun run build`, `bun run dev`, or `composer run dev`. Ask them.
 
 ## Replies
 - Be concise in your explanations - focus on what's important rather than explaining obvious details.
@@ -135,13 +135,13 @@ protected function isAccessible(User $user, ?string $path = null): bool
 ## Inertia Core
 
 - Inertia.js components should be placed in the `resources/js/Pages` directory unless specified differently in the JS bundler (vite.config.js).
-- Use `inertia()` for server-side routing instead of traditional Blade views.
+- Use `Inertia::render()` for server-side routing instead of traditional Blade views.
 - Use `search-docs` for accurate guidance on all things Inertia.
 
-<code-snippet lang="php" name="inertia Example">
+<code-snippet lang="php" name="Inertia::render Example">
 // routes/web.php example
 Route::get('/users', function () {
-    return inertia('users/index', [
+    return Inertia::render('Users/Index', [
         'users' => User::all()
     ]);
 });
@@ -213,7 +213,7 @@ Route::get('/users', function () {
 - When creating tests, make use of `php artisan make:test [options] {name}` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
 
 ### Vite Error
-- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `bun run build` or ask the user to run `bun run dev` or `composer run dev`.
 
 
 === laravel/v12 rules ===

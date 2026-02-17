@@ -6,6 +6,7 @@ import { TextField } from "@/components/ui/text-field"
 import { Button } from "@/components/ui/button"
 import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/pages/settings/settings-layout"
+import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController"
 import { FieldError, Label } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
@@ -22,7 +23,7 @@ export default function Password() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    put(route("password.update"), {
+    put(PasswordController.update().url, {
       preserveScroll: true,
       onSuccess: () => {
         reset()
@@ -58,23 +59,21 @@ export default function Password() {
             <TextField
               value={data.current_password}
               onChange={(v) => setData("current_password", v)}
-              type="password"
-              autoComplete="current-password"
               autoFocus
+              isRequired
             >
-              <Label>Current password</Label>
-              <Input type="password" />
-              <FieldError>{errors.current_password}</FieldError>
+              <Label>Current Password</Label>
+              <Input type="password" autoComplete="current-password" />
             </TextField>
 
             <TextField
               name="password"
               value={data.password}
-              autoComplete="current-password"
               onChange={(v) => setData("password", v)}
+              isRequired
             >
-              <Label>New password</Label>
-              <Input type="password" />
+              <Label>Password</Label>
+              <Input type="password" autoComplete="new-password" />
               <FieldError>{errors.password}</FieldError>
             </TextField>
 
@@ -82,9 +81,10 @@ export default function Password() {
               name="password_confirmation"
               value={data.password_confirmation}
               onChange={(v) => setData("password_confirmation", v)}
+              isRequired
             >
-              <Label>Confirm password</Label>
-              <Input type="password" />
+              <Label>Confirm Password</Label>
+              <Input type="password" autoComplete="new-password" />
               <FieldError>{errors.password_confirmation}</FieldError>
             </TextField>
 

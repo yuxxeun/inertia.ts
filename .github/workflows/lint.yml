@@ -26,33 +26,26 @@ jobs:
         with:
           php-version: '8.4'
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: '1.1.30'
-
-      - name: Cache Bun Dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/bun
-          key: bun-cache-${{ hashFiles('bun.lock') }}
-          restore-keys: |
-            bun-cache-
+          node-version: '22'
+          cache: 'npm'
 
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Install Frontend Dependencies
-        run: bun install --frozen-lockfile
+        run: npm ci
 
       - name: Run Pint
         run: vendor/bin/pint
 
       - name: Format Frontend
-        run: bun run format
+        run: npm run format
 
       - name: Lint Frontend
-        run: bun run lint
+        run: npm run lint
 
       # - name: Commit Changes
       #   uses: stefanzweifel/git-auto-commit-action@v5

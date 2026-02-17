@@ -7,14 +7,15 @@ import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/pages/settings/settings-layout"
 import {
   Modal,
-  ModalHeader,
-  ModalTitle,
-  ModalDescription,
-  ModalFooter,
   ModalBody,
   ModalClose,
   ModalContent,
+  ModalDescription,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
 } from "@/components/ui/modal"
+import DeleteAccountController from "@/actions/App/Http/Controllers/Settings/DeleteAccountController"
 import { FieldError, Label } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
@@ -33,7 +34,7 @@ export default function DeleteAccount() {
   })
 
   const deleteUser = () => {
-    destroy(route("settings.delete-account"), {
+    destroy(DeleteAccountController.destroy().url, {
       preserveScroll: true,
       onSuccess: () => closeModal(),
       onFinish: () => reset(),
@@ -77,11 +78,10 @@ export default function DeleteAccount() {
                 <TextField
                   value={data.password}
                   onChange={(v) => setData("password", v)}
-                  name="password"
-                  autoComplete="current-password"
+                  isRequired
                 >
-                  <Label>Password</Label>
-                  <Input type="password" />
+                  <Label className="sr-only">Password</Label>
+                  <Input type="password" placeholder="Password" />
                   <FieldError>{errors.password}</FieldError>
                 </TextField>
               </ModalBody>

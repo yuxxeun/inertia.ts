@@ -1,3 +1,5 @@
+"use client"
+
 import { Bars2Icon } from "@heroicons/react/20/solid"
 import { LayoutGroup, motion } from "motion/react"
 import { createContext, use, useCallback, useId, useMemo, useState } from "react"
@@ -214,14 +216,14 @@ const NavbarItem = ({ className, isCurrent, ...props }: NavbarItemProps) => {
           "group/sidebar-item pressed:bg-secondary pressed:text-secondary-fg hover:bg-secondary hover:text-secondary-fg",
           "aria-[current=page]:text-fg aria-[current=page]*:data-[slot=icon]:text-fg",
           "col-span-full grid grid-cols-[auto_1fr_1.5rem_0.5rem_auto] supports-[grid-template-columns:subgrid]:grid-cols-subgrid md:supports-[grid-template-columns:subgrid]:grid-cols-none",
-          "relative min-w-0 items-center gap-x-3 rounded-lg p-2 text-left font-medium text-base/6 md:gap-x-(--navbar-gutter) md:px-(--navbar-gutter) md:py-[calc(var(--navbar-gutter)---spacing(0.5))] md:text-sm/5",
+          "relative min-w-0 items-center gap-x-3 rounded-lg p-2 text-start font-medium text-base/6 md:gap-x-(--navbar-gutter) md:px-(--navbar-gutter) md:py-[calc(var(--navbar-gutter)---spacing(0.5))] md:text-sm/5",
           "*:data-[slot=icon]:size-5 *:data-[slot=icon]:shrink-0 *:data-[slot=icon]:text-muted-fg md:*:data-[slot=icon]:size-4",
           "*:data-[slot=loader]:size-5 *:data-[slot=loader]:shrink-0 md:*:data-[slot=loader]:size-4",
-          "*:not-nth-2:last:data-[slot=icon]:row-start-1 *:not-nth-2:last:data-[slot=icon]:ml-auto *:not-nth-2:last:data-[slot=icon]:size-5 md:*:not-nth-2:last:data-[slot=icon]:size-4",
+          "*:not-nth-2:last:data-[slot=icon]:row-start-1 *:not-nth-2:last:data-[slot=icon]:ms-auto *:not-nth-2:last:data-[slot=icon]:size-5 md:*:not-nth-2:last:data-[slot=icon]:size-4",
           "*:data-[slot=avatar]:-m-0.5 *:data-[slot=avatar]:size-6 md:*:data-[slot=avatar]:size-5",
           "*:data-[slot=icon]:text-muted-fg pressed:*:data-[slot=icon]:text-fg hover:*:data-[slot=icon]:text-fg",
           "outline-hidden focus-visible:inset-ring focus-visible:inset-ring-ring focus-visible:ring-2 focus-visible:ring-ring/20",
-          "text-left disabled:cursor-default disabled:opacity-50",
+          "text-start disabled:cursor-default disabled:opacity-50",
         ],
         className,
       )}
@@ -238,8 +240,8 @@ const NavbarItem = ({ className, isCurrent, ...props }: NavbarItemProps) => {
               transition={{ type: "spring", stiffness: 500, damping: 40 }}
               className={twJoin(
                 "absolute rounded-full bg-fg [--gutter:--spacing(0.5)]",
-                "-left-4 inset-y-[calc(var(--navbar-gutter)---spacing(0.5))] w-(--gutter) md:inset-y-auto md:w-auto",
-                "md:-bottom-(--navbar-gutter) md:inset-x-2 md:h-(--gutter)",
+                "inset-y-[calc(var(--navbar-gutter)---spacing(0.5))] -start-4 w-(--gutter) md:inset-y-auto md:w-auto",
+                "md:inset-x-2 md:-bottom-[calc(var(--navbar-gutter)+1px)] md:h-(--gutter)",
               )}
             />
           )}
@@ -250,7 +252,7 @@ const NavbarItem = ({ className, isCurrent, ...props }: NavbarItemProps) => {
 }
 
 const NavbarSpacer = ({ className, ref, ...props }: React.ComponentProps<"div">) => {
-  return <div ref={ref} className={twMerge("-ml-4 flex-1", className)} {...props} />
+  return <div ref={ref} className={twMerge("-ms-4 flex-1", className)} {...props} />
 }
 
 const NavbarStart = ({ className, ref, ...props }: React.ComponentProps<"div">) => {
@@ -274,9 +276,9 @@ const NavbarMobile = ({ className, ref, ...props }: React.ComponentProps<"div">)
         "group/navbar-mobile flex items-center gap-x-3 px-4 py-2.5 md:hidden",
         "group-has-data-navbar-sticky/navbar:sticky group-has-data-navbar-sticky/navbar:bg-navbar",
         // top
-        "group-has-data-navbar-sticky/navbar:group-has-data-[placement=top]/navbar:top-0 group-has-data-navbar-sticky/navbar:group-has-data-[placement=top]/navbar:border-b",
+        "group-has-data-navbar-sticky/navbar:group-has-placement-top/navbar:top-0 group-has-data-navbar-sticky/navbar:group-has-placement-top/navbar:border-b",
         // bottom
-        "group-has-data-navbar-sticky/navbar:group-has-data-[placement=bottom]/navbar:bottom-0 group-has-data-navbar-sticky/navbar:group-has-data-[placement=bottom]/navbar:border-t",
+        "group-has-data-navbar-sticky/navbar:group-has-placement-bottom/navbar:bottom-0 group-has-data-navbar-sticky/navbar:group-has-placement-bottom/navbar:border-t",
         className,
       )}
       {...props}
@@ -312,7 +314,7 @@ const NavbarTrigger = ({ className, onPress, ref, ...props }: NavbarTriggerProps
       intent="plain"
       aria-label={props["aria-label"] || "Toggle Navbar"}
       size="sq-sm"
-      className={cx("-ml-2 min-lg:hidden", className)}
+      className={cx("-ms-2 lg:hidden", className)}
       onPress={(event) => {
         onPress?.(event)
         toggleNavbar()

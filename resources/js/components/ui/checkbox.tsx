@@ -1,3 +1,5 @@
+"use client"
+
 import { CheckIcon, MinusIcon } from "@heroicons/react/20/solid"
 import type { CheckboxGroupProps, CheckboxProps } from "react-aria-components"
 import {

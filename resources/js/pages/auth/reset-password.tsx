@@ -3,6 +3,7 @@ import { Head, Form } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
+import NewPasswordController from "@/actions/App/Http/Controllers/Auth/NewPasswordController"
 import { FieldError, Label } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
@@ -19,28 +20,27 @@ export default function ResetPassword(args: ResetPasswordProps) {
       <Head title="Reset Password" />
 
       <Form
+        {...NewPasswordController.store.form()}
         className="space-y-6"
-        method="post"
         transform={(data) => ({ ...data, token, email })}
-        action={route("password.request")}
       >
         {({ processing, errors }) => (
           <>
-            <TextField type="email" name="email" autoComplete="username">
+            <TextField name="email" isRequired>
               <Label>Email</Label>
-              <Input type="email" placeholder="you@domain.com" />
+              <Input type="email" autoComplete="username" />
               <FieldError>{errors.email}</FieldError>
             </TextField>
 
-            <TextField name="password" autoComplete="new-password" autoFocus>
+            <TextField name="password" isRequired autoFocus>
               <Label>Password</Label>
-              <Input type="password" placeholder="Shhh, it's secret" />
+              <Input type="password" autoComplete="new-password" />
               <FieldError>{errors.password}</FieldError>
             </TextField>
 
-            <TextField name="password_confirmation" autoComplete="new-password" isRequired>
-              <Label>Confirm password</Label>
-              <Input type="password" />
+            <TextField name="password_confirmation" isRequired>
+              <Label>Confirm Password</Label>
+              <Input type="password" autoComplete="new-password" />
               <FieldError>{errors.password_confirmation}</FieldError>
             </TextField>
 

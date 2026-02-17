@@ -3,6 +3,7 @@ import { Head, Form } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
+import ConfirmablePasswordController from "@/actions/App/Http/Controllers/Auth/ConfirmablePasswordController"
 import { FieldError, Label } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
@@ -15,10 +16,10 @@ export default function ConfirmPassword() {
         This is a secure area of the application. Please confirm your password before continuing.
       </div>
 
-      <Form method="post" action={route("password.confirm")} resetOnSuccess={["password"]}>
+      <Form {...ConfirmablePasswordController.store.form()} resetOnSuccess={["password"]}>
         {({ processing, errors }) => (
           <>
-            <TextField name="password" autoComplete="current-password">
+            <TextField id="password" name="password" autoFocus>
               <Label>Password</Label>
               <Input type="password" />
               <FieldError>{errors.password}</FieldError>

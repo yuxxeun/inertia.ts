@@ -1,12 +1,14 @@
 import { useRef } from "react"
 import { Head, useForm } from "@inertiajs/react"
-import { Card } from "@/components/ui/card"
-import { Form } from "@/components/ui/form"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Form } from "react-aria-components"
 import { TextField } from "@/components/ui/text-field"
 import { Button } from "@/components/ui/button"
 import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/pages/settings/settings-layout"
 import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController"
+import { FieldError, Label } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 
 const title = "Change Password"
 
@@ -45,48 +47,46 @@ export default function Password() {
       <Head title={title} />
       <h1 className="sr-only">{title}</h1>
       <Card>
-        <Card.Header>
-          <Card.Title>{title}</Card.Title>
-          <Card.Description>
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>
             Ensure your account is using a long, random password to stay secure.
-          </Card.Description>
-        </Card.Header>
+          </CardDescription>
+        </CardHeader>
 
-        <Card.Content>
+        <CardContent>
           <Form validationErrors={errors} onSubmit={submit} className="max-w-lg space-y-6">
             <TextField
-              label="Current Password"
               value={data.current_password}
               onChange={(v) => setData("current_password", v)}
-              type="password"
-              autoComplete="current-password"
-              isRevealable
               autoFocus
               isRequired
-            />
+            >
+              <Label>Current Password</Label>
+              <Input type="password" autoComplete="current-password" />
+            </TextField>
 
             <TextField
-              type="password"
               name="password"
-              label="Password"
               value={data.password}
-              autoComplete="current-password"
               onChange={(v) => setData("password", v)}
-              errorMessage={errors.password}
-              isRevealable
               isRequired
-            />
+            >
+              <Label>Password</Label>
+              <Input type="password" autoComplete="new-password" />
+              <FieldError>{errors.password}</FieldError>
+            </TextField>
 
             <TextField
-              type="password"
-              label="Confirm Password"
               name="password_confirmation"
               value={data.password_confirmation}
               onChange={(v) => setData("password_confirmation", v)}
-              errorMessage={errors.password_confirmation}
-              isRevealable
               isRequired
-            />
+            >
+              <Label>Confirm Password</Label>
+              <Input type="password" autoComplete="new-password" />
+              <FieldError>{errors.password_confirmation}</FieldError>
+            </TextField>
 
             <div className="flex items-center gap-4">
               <Button type="submit" isDisabled={processing}>
@@ -96,7 +96,7 @@ export default function Password() {
               {recentlySuccessful && <p className="text-muted-fg text-sm">Saved.</p>}
             </div>
           </Form>
-        </Card.Content>
+        </CardContent>
       </Card>
     </>
   )

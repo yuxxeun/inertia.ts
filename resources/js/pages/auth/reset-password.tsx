@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button"
 import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
 import NewPasswordController from "@/actions/App/Http/Controllers/Auth/NewPasswordController"
+import { FieldError, Label } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 
 interface ResetPasswordProps {
   token: string
@@ -24,33 +26,23 @@ export default function ResetPassword(args: ResetPasswordProps) {
       >
         {({ processing, errors }) => (
           <>
-            <TextField
-              label="Email"
-              isRequired
-              errorMessage={errors.email}
-              type="email"
-              name="email"
-              autoComplete="username"
-            />
+            <TextField name="email" isRequired>
+              <Label>Email</Label>
+              <Input type="email" autoComplete="username" />
+              <FieldError>{errors.email}</FieldError>
+            </TextField>
 
-            <TextField
-              label="Password"
-              isRequired
-              errorMessage={errors.password}
-              type="password"
-              name="password"
-              autoComplete="new-password"
-              autoFocus
-            />
+            <TextField name="password" isRequired autoFocus>
+              <Label>Password</Label>
+              <Input type="password" autoComplete="new-password" />
+              <FieldError>{errors.password}</FieldError>
+            </TextField>
 
-            <TextField
-              label="Confirm Password"
-              type="password"
-              name="password_confirmation"
-              autoComplete="new-password"
-              errorMessage={errors.password_confirmation}
-              isRequired
-            />
+            <TextField name="password_confirmation" isRequired>
+              <Label>Confirm Password</Label>
+              <Input type="password" autoComplete="new-password" />
+              <FieldError>{errors.password_confirmation}</FieldError>
+            </TextField>
 
             <div className="mt-4 flex items-center justify-end">
               <Button type="submit" className="ml-4" isPending={processing}>

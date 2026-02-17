@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button"
 import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
 import PasswordResetLinkController from "@/actions/App/Http/Controllers/Auth/PasswordResetLinkController"
+import { FieldError, Label } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 
 interface ForgotPasswordProps {
   status: string
@@ -18,7 +20,11 @@ export default function ForgotPassword({ status }: ForgotPasswordProps) {
       <Form className="mt-4 space-y-4" {...PasswordResetLinkController.store.form()}>
         {({ processing, errors }) => (
           <>
-            <TextField type="text" name="email" isRequired errorMessage={errors.email} autoFocus />
+            <TextField name="email" isRequired autoFocus>
+              <Label className="sr-only">Email</Label>
+              <Input type="email" />
+              <FieldError>{errors.email}</FieldError>
+            </TextField>
 
             <div className="flex items-center justify-end">
               <Button type="submit" className="w-full" isPending={processing}>

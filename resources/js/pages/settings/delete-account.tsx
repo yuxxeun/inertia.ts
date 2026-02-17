@@ -1,23 +1,13 @@
 import { useState } from "react"
 import { Head, useForm } from "@inertiajs/react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { TextField } from "@/components/ui/text-field"
 import { Button } from "@/components/ui/button"
 import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/pages/settings/settings-layout"
-import {
-  Modal,
-  ModalHeader,
-  ModalTitle,
-  ModalDescription,
-  ModalFooter,
-  ModalBody,
-  ModalClose,
-  ModalContent,
-} from "@/components/ui/modal"
-import { FieldError, Label } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-
+import { Modal } from "@/components/ui/modal"
+import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController"
+import DeleteAccountController from "@/actions/App/Http/Controllers/Settings/DeleteAccountController"
 const title = "Delete Account"
 export default function DeleteAccount() {
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
@@ -33,7 +23,7 @@ export default function DeleteAccount() {
   })
 
   const deleteUser = () => {
-    destroy(route("settings.delete-account"), {
+    destroy(DeleteAccountController.destroy().url, {
       preserveScroll: true,
       onSuccess: () => closeModal(),
       onFinish: () => reset(),
@@ -50,50 +40,48 @@ export default function DeleteAccount() {
       <Head title={title} />
       <h1 className="sr-only">{title}</h1>
       <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription className="max-w-lg">
+        <Card.Header>
+          <Card.Title>{title}</Card.Title>
+          <Card.Description className="max-w-lg">
             Once your account is deleted, all of its resources and data will be permanently deleted.
             Before deleting your account, please download any data or information that you wish to
             retain.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+          </Card.Description>
+        </Card.Header>
+        <Card.Content>
           <Modal onOpenChange={setConfirmingUserDeletion} isOpen={confirmingUserDeletion}>
             <Button onPress={() => setConfirmingUserDeletion(true)} intent="danger">
               Delete Account
             </Button>
-            <ModalContent>
-              <ModalHeader>
-                <ModalTitle>Delete Account</ModalTitle>
-                <ModalDescription>
+            <Modal.Content>
+              <Modal.Header>
+                <Modal.Title>Delete Account</Modal.Title>
+                <Modal.Description>
                   Are you sure you want to delete your account? Once your account is deleted, all of
                   its resources and data will be permanently deleted. Please enter your password to
                   confirm you would like to permanently delete your account.
-                </ModalDescription>
-              </ModalHeader>
+                </Modal.Description>
+              </Modal.Header>
 
-              <ModalBody>
+              <Modal.Body>
                 <TextField
+                  type="password"
+                  placeholder="Password"
                   value={data.password}
                   onChange={(v) => setData("password", v)}
-                  name="password"
-                  autoComplete="current-password"
-                >
-                  <Label>Password</Label>
-                  <Input type="password" />
-                  <FieldError>{errors.password}</FieldError>
-                </TextField>
-              </ModalBody>
-              <ModalFooter>
-                <ModalClose>Cancel</ModalClose>
+                  errorMessage={errors.password}
+                  isRequired
+                />
+              </Modal.Body>
+              <Modal.Footer>
+                <Modal.Close>Cancel</Modal.Close>
                 <Button intent="danger" type="submit" onPress={deleteUser} isDisabled={processing}>
                   Continue
                 </Button>
-              </ModalFooter>
-            </ModalContent>
+              </Modal.Footer>
+            </Modal.Content>
           </Modal>
-        </CardContent>
+        </Card.Content>
       </Card>
     </>
   )

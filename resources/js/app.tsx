@@ -4,8 +4,6 @@ import { createInertiaApp } from "@inertiajs/react"
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers"
 import { createRoot, hydrateRoot } from "react-dom/client"
 import { initializeTheme } from "./hooks/use-theme"
-import { Ziggy } from "@/ziggy"
-import { useRoute } from "ziggy-js"
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel"
 
@@ -14,8 +12,7 @@ createInertiaApp({
   resolve: (name) =>
     resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob("./pages/**/*.tsx")),
   setup({ el, App, props }) {
-    // @ts-expect-error
-    window.route = useRoute(Ziggy)
+    const root = createRoot(el);
 
     const appElement = (
       <Providers>
@@ -27,7 +24,7 @@ createInertiaApp({
       return
     }
 
-    createRoot(el).render(appElement)
+    root.render(appElement)
   },
   progress: false,
 })

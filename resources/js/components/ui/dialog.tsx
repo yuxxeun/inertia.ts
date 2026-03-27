@@ -1,3 +1,5 @@
+"use client"
+
 import { XMarkIcon } from "@heroicons/react/24/solid"
 import type { HeadingProps, TextProps } from "react-aria-components"
 import {

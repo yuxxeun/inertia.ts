@@ -12,13 +12,22 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
       <div className="flex flex-col items-start gap-6 md:flex-row md:gap-16">
         <div className="w-full shrink-0 md:w-56">
           <ListBox aria-label="Menu" selectionMode="single">
-            <NavLink href="/settings/profile" isCurrent={ProfileController.edit().url === window.location.pathname}>
+            <NavLink
+              href="/settings/profile"
+              isCurrent={ProfileController.edit().url === window.location.pathname}
+            >
               Profile
             </NavLink>
-            <NavLink href="/settings/password" isCurrent={PasswordController.edit().url === window.location.pathname}>
+            <NavLink
+              href="/settings/password"
+              isCurrent={PasswordController.edit().url === window.location.pathname}
+            >
               Change password
             </NavLink>
-            <NavLink href="/settings/appearance" isCurrent={AppearanceController.url() === window.location.pathname}>
+            <NavLink
+              href="/settings/appearance"
+              isCurrent={AppearanceController.url() === window.location.pathname}
+            >
               Appearance
             </NavLink>
             <NavLink

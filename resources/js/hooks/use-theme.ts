@@ -1,54 +1,102 @@
-import { useEffect, useState } from "react"
+import { useMemo, useSyncExternalStore } from "react"
 
-export type Theme = "light" | "dark" | "system"
+export type ResolvedTheme = "light" | "dark"
+export type Theme = ResolvedTheme | "system"
 
-const prefersDark = () =>
-  typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
+export type UseThemeReturn = {
+  readonly theme: Theme
+  readonly resolvedTheme: ResolvedTheme
+  readonly updateTheme: (mode: Theme) => void
+}
 
-const applyTheme = (theme: Theme) => {
-  const isDark = theme === "dark" || (theme === "system" && prefersDark())
+const listeners = new Set<() => void>()
+let currentTheme: Theme = "system"
+let systemDark = false
 
+const setCookie = (name: string, value: string, days = 365): void => {
+  if (typeof document === "undefined") return
+  const maxAge = days * 24 * 60 * 60
+  document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax`
+}
+
+const getStoredTheme = (): Theme => {
+  if (typeof window === "undefined") return "system"
+  return (localStorage.getItem("theme") as Theme) || "system"
+}
+
+const isDarkMode = (theme: Theme): boolean => {
+  return theme === "dark" || (theme === "system" && systemDark)
+}
+
+const applyTheme = (theme: Theme): void => {
+  if (typeof document === "undefined") return
+  const isDark = isDarkMode(theme)
   document.documentElement.classList.toggle("dark", isDark)
+  document.documentElement.style.colorScheme = isDark ? "dark" : "light"
 }
 
-const mediaQuery =
-  typeof window !== "undefined" ? window.matchMedia("(prefers-color-scheme: dark)") : null
-
-const handleSystemThemeChange = () => {
-  const currentTheme = localStorage.getItem("theme") as Theme
-  applyTheme(currentTheme || "system")
+const subscribe = (callback: () => void) => {
+  listeners.add(callback)
+  return () => listeners.delete(callback)
 }
 
-export function initializeTheme() {
-  const savedTheme = (localStorage.getItem("theme") as Theme) || "system"
-
-  applyTheme(savedTheme)
-
-  // Add the event listener for system theme changes...
-  if (mediaQuery) {
-    return () => mediaQuery.removeEventListener("change", handleSystemThemeChange)
-  }
-  return () => {}
+const notify = (): void => {
+  listeners.forEach((listener) => {
+    listener()
+  })
 }
 
-export function useTheme() {
-  const [theme, setTheme] = useState<Theme>("system")
+export function initializeTheme(): void {
+  if (typeof window === "undefined") return
 
-  const updateTheme = (mode: Theme) => {
-    setTheme(mode)
-    localStorage.setItem("theme", mode)
-    applyTheme(mode)
+  const mq = window.matchMedia("(prefers-color-scheme: dark)")
+  systemDark = mq.matches
+
+  if (!localStorage.getItem("theme")) {
+    localStorage.setItem("theme", "system")
+    setCookie("theme", "system")
   }
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme | null
-    updateTheme(savedTheme || "system")
+  currentTheme = getStoredTheme()
+  applyTheme(currentTheme)
 
-    if (mediaQuery) {
-      return () => mediaQuery.removeEventListener("change", handleSystemThemeChange)
+  mq.addEventListener("change", (e) => {
+    systemDark = e.matches
+    applyTheme(currentTheme)
+    notify()
+  })
+}
+
+export function useTheme(): UseThemeReturn {
+  const theme = useSyncExternalStore(
+    subscribe,
+    () => currentTheme,
+    () => "system" as const,
+  )
+
+  const isSystemDark = useSyncExternalStore(
+    subscribe,
+    () => systemDark,
+    () => false,
+  )
+
+  const resolvedTheme: ResolvedTheme = useMemo(() => {
+    return theme === "dark" || (theme === "system" && isSystemDark) ? "dark" : "light"
+  }, [theme, isSystemDark])
+
+  const updateTheme = (mode: Theme): void => {
+    currentTheme = mode
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", mode)
+      setCookie("theme", mode)
     }
-    return () => {}
-  }, [])
+    applyTheme(mode)
+    notify()
+  }
 
-  return { theme, updateTheme }
+  return {
+    theme,
+    resolvedTheme,
+    updateTheme,
+  } as const
 }

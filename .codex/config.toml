@@ -1,3 +1,19 @@
 [mcp_servers.shadcn]
 command = "npx"
 args = ["shadcn@latest", "mcp"]
+
+[mcp_servers.laravel-boost]
+command = "php"
+args = ["artisan", "boost:mcp"]
+cwd = "/Users/irsyad/Code/laravel"
+
+[mcp_servers.laravel-boost.tools.search-docs]
+approval_mode = "approve"
+
+[mcp_servers.herd]
+command = "php"
+args = ["/Applications/Herd.app/Contents/Resources/herd-mcp.phar"]
+cwd = "/Users/irsyad/Code/laravel"
+
+[mcp_servers.herd.env]
+SITE_PATH = "/Users/irsyad/Code/laravel"

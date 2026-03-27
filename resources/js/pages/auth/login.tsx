@@ -1,6 +1,6 @@
 import GuestLayout from "@/layouts/guest-layout"
 import { Head, Form } from "@inertiajs/react"
-import type React from "react"
+
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Link } from "@/components/ui/link"

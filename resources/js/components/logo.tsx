@@ -1,4 +1,3 @@
-import type React from "react"
 import { Avatar } from "@/components/ui/avatar"
 
 export function Logo({ className, ...props }: React.ComponentProps<typeof Avatar>) {

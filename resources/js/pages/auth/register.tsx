@@ -6,7 +6,6 @@ import { TextField } from "@/components/ui/text-field"
 import { Loader } from "@/components/ui/loader"
 import { FieldError, Label } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import type React from "react"
 
 export default function Register() {
   return (

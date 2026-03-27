@@ -99,8 +99,4 @@ export default function DeleteAccount() {
   )
 }
 
-DeleteAccount.layout = (page: any) => (
-  <AppLayout>
-    <SettingsLayout children={page} />
-  </AppLayout>
-)
+DeleteAccount.layout = [AppLayout, SettingsLayout]

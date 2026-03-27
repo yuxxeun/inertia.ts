@@ -102,8 +102,4 @@ export default function Password() {
   )
 }
 
-Password.layout = (page: any) => (
-  <AppLayout>
-    <SettingsLayout children={page} />
-  </AppLayout>
-)
+Password.layout = [AppLayout, SettingsLayout]

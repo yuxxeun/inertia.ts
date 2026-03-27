@@ -100,8 +100,4 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
   )
 }
 
-Profile.layout = (page: any) => (
-  <AppLayout>
-    <SettingsLayout children={page} />
-  </AppLayout>
-)
+Profile.layout = [AppLayout, SettingsLayout]

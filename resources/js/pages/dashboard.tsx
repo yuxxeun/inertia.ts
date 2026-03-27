@@ -19,4 +19,4 @@ export default function Dashboard({ auth }: SharedData) {
   )
 }
 
-Dashboard.layout = (page: any) => <AppLayout children={page} />
+Dashboard.layout = AppLayout

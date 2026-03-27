@@ -28,8 +28,4 @@ export default function Appearance() {
   )
 }
 
-Appearance.layout = (page: any) => (
-  <AppLayout>
-    <SettingsLayout children={page} />
-  </AppLayout>
-)
+Appearance.layout = [AppLayout, SettingsLayout]

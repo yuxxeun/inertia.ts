@@ -1,6 +1,6 @@
 import { composeTailwindRenderProps } from "@/lib/primitive"
 import { Container } from "@/components/ui/container"
-import { ListBox, ListBoxItem, type ListBoxItemProps } from "react-aria-components"
+import { ListBox, ListBoxItem, type ListBoxItemProps } from "react-aria-components/ListBox"
 import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController"
 import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController"
 import AppearanceController from "@/actions/App/Http/Controllers/Settings/AppearanceController"

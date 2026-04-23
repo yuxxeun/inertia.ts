@@ -1,9 +1,14 @@
-import type { DialogProps, DialogTriggerProps, ModalOverlayProps } from "react-aria-components"
 import {
+  type DialogProps,
   DialogTrigger as DialogTriggerPrimitive,
+  type DialogTriggerProps,
+} from "react-aria-components/Dialog"
+
+import {
   ModalOverlay,
+  type ModalOverlayProps,
   Modal as ModalPrimitive,
-} from "react-aria-components"
+} from "react-aria-components/Modal"
 import { cx } from "@/lib/primitive"
 import {
   Dialog,
@@ -108,12 +113,12 @@ const ModalClose = DialogClose
 
 export {
   Modal,
-  ModalTrigger,
-  ModalHeader,
-  ModalTitle,
-  ModalDescription,
-  ModalFooter,
   ModalBody,
   ModalClose,
   ModalContent,
+  ModalDescription,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  ModalTrigger,
 }

@@ -1,4 +1,7 @@
-import { Link as LinkPrimitive, type LinkProps as LinkPrimitiveProps } from "react-aria-components"
+import {
+  Link as LinkPrimitive,
+  type LinkProps as LinkPrimitiveProps,
+} from "react-aria-components/Link"
 import { cx } from "@/lib/primitive"
 
 export interface LinkProps extends LinkPrimitiveProps {

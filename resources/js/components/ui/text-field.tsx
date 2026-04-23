@@ -1,5 +1,7 @@
-import type { TextFieldProps } from "react-aria-components"
-import { TextField as TextFieldPrimitive } from "react-aria-components"
+import {
+  TextField as TextFieldPrimitive,
+  type TextFieldProps,
+} from "react-aria-components/TextField"
 import { cx } from "@/lib/primitive"
 import { fieldStyles } from "./field"
 

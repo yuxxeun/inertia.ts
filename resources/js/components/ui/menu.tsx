@@ -1,22 +1,21 @@
 import { CheckIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
+import { Button, type ButtonProps } from "react-aria-components/Button"
+import { Collection } from "react-aria-components/Collection"
+import { composeRenderProps } from "react-aria-components/composeRenderProps"
+import { Header } from "react-aria-components/Header"
 import type {
-  ButtonProps,
   MenuItemProps as MenuItemPrimitiveProps,
   MenuProps as MenuPrimitiveProps,
   MenuSectionProps as MenuSectionPrimitiveProps,
   MenuTriggerProps as MenuTriggerPrimitiveProps,
-} from "react-aria-components"
+} from "react-aria-components/Menu"
 import {
-  Button,
-  Collection,
-  composeRenderProps,
-  Header,
   MenuItem as MenuItemPrimitive,
   Menu as MenuPrimitive,
   MenuSection as MenuSectionPrimitive,
   MenuTrigger as MenuTriggerPrimitive,
   SubmenuTrigger as SubmenuTriggerPrimitive,
-} from "react-aria-components"
+} from "react-aria-components/Menu"
 import { twMerge } from "tailwind-merge"
 import { tv, type VariantProps } from "tailwind-variants"
 import { cx } from "@/lib/primitive"
@@ -115,7 +114,7 @@ const MenuItem = ({ className, intent, children, ...props }: MenuItemProps) => {
                 intent === "danger" && "open:bg-danger-subtle open:text-danger-subtle-fg",
                 intent === "warning" && "open:bg-warning-subtle open:text-warning-subtle-fg",
                 intent === undefined &&
-                  "open:bg-accent open:text-accent-fg open:*:data-[slot=icon]:text-accent-fg open:*:[.text-muted-fg]:text-accent-fg",
+                  "open:bg-accent open:text-accent-fg open:*:[.text-muted-fg]:text-accent-fg open:*:[svg]:text-accent-fg",
                 className,
               )
             : className,
@@ -126,14 +125,20 @@ const MenuItem = ({ className, intent, children, ...props }: MenuItemProps) => {
     >
       {(values) => (
         <>
-          {values.isSelected && (
-            <>{["single", "multiple"].includes(values.selectionMode) && <CheckIcon />}</>
+          {values.isSelected && ["single", "multiple"].includes(values.selectionMode) && (
+            <CheckIcon />
           )}
 
           {typeof children === "function" ? children(values) : children}
 
           {values.hasSubmenu && (
-            <ChevronRightIcon data-slot="chevron" className="absolute end-2 size-3.5" />
+            <ChevronRightIcon
+              data-slot="chevron"
+              className="-translate-y-1/2 absolute end-0 size-4"
+              style={{
+                top: "calc(var(--spacing) * 3)",
+              }}
+            />
           )}
         </>
       )}
@@ -187,18 +192,18 @@ const MenuShortcut = DropdownKeyboard
 const MenuLabel = DropdownLabel
 const MenuDescription = DropdownDescription
 
-export type { MenuContentProps, MenuTriggerProps, MenuItemProps, MenuSectionProps }
+export type { MenuContentProps, MenuItemProps, MenuSectionProps, MenuTriggerProps }
 export {
-  menuContentStyles,
   Menu,
-  MenuShortcut,
   MenuContent,
+  MenuDescription,
   MenuHeader,
   MenuItem,
+  MenuLabel,
   MenuSection,
   MenuSeparator,
-  MenuLabel,
-  MenuDescription,
-  MenuTrigger,
+  MenuShortcut,
   MenuSubMenu,
+  MenuTrigger,
+  menuContentStyles,
 }

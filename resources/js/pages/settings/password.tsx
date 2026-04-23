@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { Head, useForm } from "@inertiajs/react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form } from "react-aria-components"
+import { Form } from "react-aria-components/Form"
 import { TextField } from "@/components/ui/text-field"
 import { Button } from "@/components/ui/button"
 import AppLayout from "@/layouts/app-layout"

@@ -1,5 +1,6 @@
 import inertia from "@inertiajs/vite"
 import { wayfinder } from "@laravel/vite-plugin-wayfinder"
+import optimizeLocales from "@react-aria/optimize-locales-plugin"
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
 import laravel from "laravel-vite-plugin"
@@ -19,7 +20,13 @@ export default defineConfig({
         }),
         tailwindcss(),
         wayfinder({
-            formVariants: true,
+            formVariants: true
         }),
+        {
+            ...optimizeLocales.vite({
+                locales: ["en-US", "fr-FR"],
+            }),
+            enforce: "pre",
+        },
     ],
 })

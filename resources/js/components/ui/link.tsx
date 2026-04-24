@@ -1,29 +1,12 @@
-import { Link as InertiaLink, type InertiaLinkProps } from "@inertiajs/react"
 import {
   Link as LinkPrimitive,
   type LinkProps as LinkPrimitiveProps,
 } from "react-aria-components/Link"
 import { cx } from "@/lib/primitive"
-
-type LinkDomProps =
-  | (React.ComponentPropsWithoutRef<"a"> & {
-      href: string
-      ref?: React.Ref<HTMLAnchorElement>
-    })
-  | (React.ComponentPropsWithoutRef<"span"> & {
-      ref?: React.Ref<HTMLSpanElement>
-    })
+import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react";
 
 export interface LinkProps extends LinkPrimitiveProps {
-  ref?: React.Ref<HTMLAnchorElement>
-}
-
-function renderLink(domProps: LinkDomProps) {
-  if ("href" in domProps) {
-    return <InertiaLink {...(domProps as InertiaLinkProps)} />
-  }
-
-  return <span {...domProps} />
+  ref?: React.RefObject<HTMLAnchorElement>
 }
 
 export function Link({ className, ref, ...props }: LinkProps) {
@@ -31,14 +14,22 @@ export function Link({ className, ref, ...props }: LinkProps) {
     <LinkPrimitive
       ref={ref}
       className={cx(
-        "font-medium text-(--text)",
-        "outline-0 outline-offset-2 focus-visible:outline-2 focus-visible:outline-ring forced-colors:outline-[Highlight]",
-        "disabled:cursor-default disabled:opacity-50 forced-colors:disabled:text-[GrayText]",
-        "href" in props && "cursor-pointer",
+        [
+          "font-medium text-(--text)",
+          "outline-0 outline-offset-2 focus-visible:outline-2 focus-visible:outline-ring forced-colors:outline-[Highlight]",
+          "disabled:cursor-default disabled:opacity-50 forced-colors:disabled:text-[GrayText]",
+          "href" in props && "cursor-pointer",
+        ],
         className,
       )}
       {...props}
-      render={renderLink}
+      render={(domProps) =>
+        "href" in domProps ? (
+          <InertiaLink {...(domProps as InertiaLinkProps)} />
+        ) : (
+          <span {...domProps} />
+        )
+      }
     />
   )
 }

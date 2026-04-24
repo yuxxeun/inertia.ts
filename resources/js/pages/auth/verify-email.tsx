@@ -1,7 +1,7 @@
 import GuestLayout from "@/layouts/guest-layout"
 import { Head, Form } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
-import { Link } from "@/components/ui/link"
+import { Link } from "@inertiajs/react"
 import { Loader } from "@/components/ui/loader"
 import EmailVerificationNotificationController from "@/actions/App/Http/Controllers/Auth/EmailVerificationNotificationController"
 
@@ -29,9 +29,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
 
             <Link
               href="/logout"
-              routerOptions={{
-                method: "post",
-              }}
+              method="post"
               className="text-primary-subtle-fg"
             >
               Log Out

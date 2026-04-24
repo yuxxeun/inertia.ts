@@ -4,7 +4,7 @@ import type { SharedData } from "@/types/shared"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form } from "react-aria-components/Form"
 import { TextField } from "@/components/ui/text-field"
-import { Link } from "@/components/ui/link"
+import { Link } from "@inertiajs/react"
 import { Button } from "@/components/ui/button"
 import SettingsLayout from "@/pages/settings/settings-layout"
 import { FieldError, Label } from "@/components/ui/field"
@@ -71,9 +71,7 @@ export default function Profile({ mustVerifyEmail, status }: Props) {
                   <Link
                     href="/email/verification-notification"
                     className="text-primary-subtle-fg hover:underline"
-                    routerOptions={{
-                      method: "post",
-                    }}
+                    method="post"
                   >
                     Click here to re-send the verification email.
                   </Link>

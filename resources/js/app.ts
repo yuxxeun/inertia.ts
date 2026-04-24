@@ -1,5 +1,4 @@
 import { createInertiaApp } from "@inertiajs/react"
-import Providers from "@/components/providers"
 import { initializeTheme } from "@/hooks/use-theme"
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel"
@@ -8,9 +7,6 @@ createInertiaApp({
   strictMode: true,
   progress: {
     color: "#4B5563",
-  },
-  withApp(app) {
-    return <Providers>{app}</Providers>
   },
 })
 

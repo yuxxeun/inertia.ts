@@ -28,6 +28,7 @@ import {
   dropdownSectionStyles,
 } from "./dropdown"
 import { PopoverContent, type PopoverContentProps } from "./popover"
+import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react";
 
 const Menu = (props: MenuTriggerPrimitiveProps) => <MenuTriggerPrimitive {...props} />
 
@@ -122,6 +123,13 @@ const MenuItem = ({ className, intent, children, ...props }: MenuItemProps) => {
       )}
       textValue={textValue}
       {...props}
+      render={(domProps) =>
+        "href" in domProps ? (
+          <InertiaLink {...(domProps as InertiaLinkProps)} />
+        ) : (
+          <span {...domProps} />
+        )
+      }
     >
       {(values) => (
         <>

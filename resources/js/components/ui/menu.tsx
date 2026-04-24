@@ -28,7 +28,7 @@ import {
   dropdownSectionStyles,
 } from "./dropdown"
 import { PopoverContent, type PopoverContentProps } from "./popover"
-import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react";
+import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react"
 
 const Menu = (props: MenuTriggerPrimitiveProps) => <MenuTriggerPrimitive {...props} />
 

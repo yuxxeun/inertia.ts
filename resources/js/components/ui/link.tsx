@@ -3,7 +3,7 @@ import {
   type LinkProps as LinkPrimitiveProps,
 } from "react-aria-components/Link"
 import { cx } from "@/lib/primitive"
-import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react";
+import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react"
 
 export interface LinkProps extends LinkPrimitiveProps {
   ref?: React.RefObject<HTMLAnchorElement>

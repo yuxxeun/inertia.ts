@@ -1,10 +1,11 @@
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Container } from "@/components/ui/container"
 import { ListBox, ListBoxItem, type ListBoxItemProps } from "react-aria-components/ListBox"
 import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController"
 import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController"
 import AppearanceController from "@/actions/App/Http/Controllers/Settings/AppearanceController"
 import DeleteAccountController from "@/actions/App/Http/Controllers/Settings/DeleteAccountController"
+import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react"
 
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -51,11 +52,19 @@ export function NavLink({ isCurrent, className, ...props }: NavLinkProps) {
   return (
     <ListBoxItem
       textValue={props.children as string}
-      className={composeTailwindRenderProps(className, [
+      className={cx(
         "block py-2 font-medium text-sm",
         isCurrent ? "font-semibold text-fg" : "text-muted-fg hover:text-fg",
-      ])}
+        className,
+      )}
       {...props}
+      render={(domProps) =>
+        "href" in domProps ? (
+          <InertiaLink {...(domProps as InertiaLinkProps)} />
+        ) : (
+          <span {...domProps} />
+        )
+      }
     />
   )
 }

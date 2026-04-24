@@ -1,7 +1,7 @@
 import { Bars2Icon } from "@heroicons/react/20/solid"
 import { LayoutGroup, motion } from "motion/react"
 import { createContext, use, useCallback, useId, useMemo, useState } from "react"
-import { Link, type LinkProps } from "react-aria-components/Link"
+import { Link, type LinkProps } from "@/components/ui/link"
 import { twJoin, twMerge } from "tailwind-merge"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cx } from "@/lib/primitive"
@@ -237,8 +237,8 @@ const NavbarItem = ({ className, isCurrent, ...props }: NavbarItemProps) => {
               transition={{ type: "spring", stiffness: 500, damping: 40 }}
               className={twJoin(
                 "absolute rounded-full bg-fg [--gutter:--spacing(0.5)]",
-                "inset-y-[calc(var(--navbar-gutter)---spacing(0.5))] -start-4 w-(--gutter) md:inset-y-auto md:w-auto",
-                "md:inset-x-2 md:-bottom-[calc(var(--navbar-gutter)+1px)] md:h-(--gutter)",
+                "-start-4 inset-y-[calc(var(--navbar-gutter)---spacing(0.5))] w-(--gutter) md:inset-y-auto md:w-auto",
+                "md:-bottom-[calc(var(--navbar-gutter)+1px)] md:inset-x-2 md:h-(--gutter)",
               )}
             />
           )}

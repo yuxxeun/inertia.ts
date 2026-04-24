@@ -1,4 +1,4 @@
-import { type InertiaLinkProps, Link as InertiaLink, router, usePage } from "@inertiajs/react"
+import { router, usePage } from "@inertiajs/react"
 import { useEffect, useState } from "react"
 import { Avatar } from "@/components/ui/avatar"
 import { Button, buttonStyles } from "@/components/ui/button"
@@ -24,9 +24,9 @@ import {
 } from "@/components/ui/navbar"
 import { Logo } from "@/components/logo"
 import type { SharedData } from "@/types/shared"
-import { Link } from "@inertiajs/react"
+import { Link } from "@/components/ui/link"
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline"
-import { logout } from "@/routes";
+import { logout } from "@/routes"
 
 const navigations = [
   {
@@ -128,9 +128,7 @@ function UserMenu() {
           <MenuLabel>Appearance</MenuLabel>
         </MenuItem>
         <MenuSeparator />
-        <MenuItem
-          onAction={() => router.post(logout().url)}
-        >
+        <MenuItem onAction={() => router.post(logout().url)}>
           <MenuLabel>Logout</MenuLabel>
           <ArrowRightEndOnRectangleIcon />
         </MenuItem>

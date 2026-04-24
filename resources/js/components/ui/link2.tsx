@@ -5,25 +5,8 @@ import {
 } from "react-aria-components/Link"
 import { cx } from "@/lib/primitive"
 
-type LinkDomProps =
-  | (React.ComponentPropsWithoutRef<"a"> & {
-      href: string
-      ref?: React.Ref<HTMLAnchorElement>
-    })
-  | (React.ComponentPropsWithoutRef<"span"> & {
-      ref?: React.Ref<HTMLSpanElement>
-    })
-
 export interface LinkProps extends LinkPrimitiveProps {
   ref?: React.Ref<HTMLAnchorElement>
-}
-
-function renderLink(domProps: LinkDomProps) {
-  if ("href" in domProps) {
-    return <InertiaLink {...(domProps as InertiaLinkProps)} />
-  }
-
-  return <span {...domProps} />
 }
 
 export function Link({ className, ref, ...props }: LinkProps) {
@@ -38,7 +21,13 @@ export function Link({ className, ref, ...props }: LinkProps) {
         className,
       )}
       {...props}
-      render={renderLink}
+      render={(domProps) =>
+        "href" in domProps ? (
+          <InertiaLink {...(domProps as InertiaLinkProps)} />
+        ) : (
+          <span {...domProps} />
+        )
+      }
     />
   )
 }

@@ -1,11 +1,13 @@
+import { Link as InertiaLink, type InertiaLinkProps } from "@inertiajs/react"
 import {
   Link as LinkPrimitive,
   type LinkProps as LinkPrimitiveProps,
 } from "react-aria-components/Link"
 import { cx } from "@/lib/primitive"
-import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react"
 
-export interface LinkProps extends LinkPrimitiveProps {
+export interface LinkProps
+  extends LinkPrimitiveProps,
+    Omit<InertiaLinkProps, keyof LinkPrimitiveProps> {
   ref?: React.RefObject<HTMLAnchorElement>
 }
 
@@ -22,14 +24,14 @@ export function Link({ className, ref, ...props }: LinkProps) {
         ],
         className,
       )}
-      {...props}
       render={(domProps) =>
         "href" in domProps ? (
-          <InertiaLink {...(domProps as InertiaLinkProps)} />
+          <InertiaLink {...(props as InertiaLinkProps)} {...(domProps as InertiaLinkProps)} />
         ) : (
           <span {...domProps} />
         )
       }
+      {...(props as LinkPrimitiveProps)}
     />
   )
 }
